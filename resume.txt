@@ -1,10 +1,89 @@
-Ph.D. Candidate in Electrical and Computer Engineering (Minor in Industrial and Systems Engineering).
-Expertise in machine learning, mathematical optimization, convex optimization, sequential decision-making, and control.
-Research focus on multi-armed bandits, online convex optimization, and time series analysis.
-Strong Python skills including data engineering pipelines, Pandas, NumPy, and Scikit-Learn.
-Professional experience as an AI Fellow, Data Analyst, and Seismic Imaging Analyst.
+# One atomic claim per line. Blank lines and lines starting with # are ignored.
 
-# Append additional experience lines below (one per line).
-# Blank lines and lines starting with # are ignored.
+# Profile / credentials
+USC ECE Ph.D. candidate (expected Dec 2026), GPA 3.90/4.00.
+Ph.D. in Electrical and Computer Engineering with minor in Industrial and Systems Engineering (ISE).
+B.S. in Electrical Engineering from Sharif University of Technology.
+National Physics Olympiad Bronze Medalist (Iranian National Physics Olympiad, 2013; top 50 nationwide).
+Located in Los Angeles, CA; open to US-based and remote-US roles.
+Work authorization: F-1 OPT eligible.
+Hands-on (but not production grade) experience in machine learning, deep learning, LLM prompt engineering, and applied AI system design.
 
+# Research focus
+Research focuses on sequential decision-making and large-scale real-time optimization.
+Designs algorithms for both adversarial and stochastic environments.
+Strong theoretical background in linear algebra, probability, and statistics.
+Expertise in multi-armed bandits, online convex optimization, online learning, and real-time control.
+Coursework includes Convex Optimization, Machine Learning, Algorithms, Probability, and Linear Algebra.
 
+# Diligence Machines — PhD AI Fellow (May 2026 -- Jun 2026)
+Worked on an LLM-based collaboration tool to automate aggregation and summarization of team brainstorming and decision workflows.
+Balanced workloads across multiple LLM API calls to prevent bottlenecks.
+Moved math calculations from the LLM to the backend, fixing calculation errors and reducing API costs.
+Implemented robust retry logic that fixed a critical bug losing 30% of system emails.
+Diagnosed system failures by running automated local tests in Docker.
+Proposed upgrading a regex-based text parser to LLM-driven atomic proposition extraction for better topic clustering.
+
+# Chevron CiSoft (USC) — ML & Optimization Intern (May 2025 -- Aug 2025)
+Trained neural surrogates in PyTorch for inverse design pipelines, using them as objective functions to optimize diverse design parameters.
+Developed a Voronoi-based spatial optimization algorithm to automate facility / infill well placement.
+Developed a two-phase spatial optimization pipeline combining exponential and binary search with derivative-free optimizers.
+Maximized the number of infills subject to strict geometric constraints.
+
+# USC Graduate Researcher (Aug 2019 -- Dec 2026)
+Researcher in real-time optimization and control at University of Southern California.
+Engineered real-time optimization algorithms to minimize costs under unknown, adversarial resource arrivals.
+Engineered an online policy selection algorithm over linear FIR filters for real-time control and resource allocation.
+Achieved robust resource allocation under worst-case arrivals and adversarial, state-dependent utility functions.
+Generalized the Frank-Wolfe algorithm to nonsmooth constrained optimization using ADMM and primal-dual methods, with theoretical proofs and empirical validation (first author, COAP 2024).
+Designed UCB-based bandit / RL algorithms for real-time decision-making in queuing systems.
+Selected optimal transmission rates under partial ACK/NACK feedback, analogous to dynamic pricing under inventory constraints.
+Optimized system throughput by learning random system capacities from partial feedback.
+
+# Other projects
+Built a scalable LLM-powered gap analysis / checklist compliance pipeline (Gemini API, Pydantic) with cost-optimized document filtering and automated metadata validation.
+Built an end-to-end CNN image classification pipeline in PyTorch on 87k ASL images (29 classes), achieving 97.6% test accuracy with SGD + momentum and adaptive learning rates.
+Fine-tuned EfficientNetB0 and VGG16 for bird species classification with data augmentation and rigorous evaluation metrics.
+
+# Honors & service
+USC–Amazon Best Poster Award (2023) for research on nonsmooth projection-free optimization.
+Selected presenter at INFORMS Annual Meeting (2023) on nonsmooth projection-free optimization.
+Invited speaker at the 46th SoCal Control Workshop (2026) on real-time allocation control for storage and inventory systems (UC Irvine).
+Journal and conference reviewer for SIAM Journal on Optimization (SIOPT) and Learning for Dynamics and Control (L4DC).
+
+# Programming / tools
+Strong Python skills (NumPy, Pandas, Scikit-Learn, Statsmodels, Matplotlib, PyTorch).
+some knoledge in C and low level programming.
+Experience with Git and Linux/Unix.
+Experience with Gurobi and CVXPY for mathematical optimization.
+Experience with Docker.
+Experience with LLM APIs, Gemini API, Pydantic, and backend optimization for LLM-based systems.
+
+# Machine learning
+Predictive modeling experience including linear regression, logistic regression, and PCA.
+Multi-armed bandits experience including UCB and Thompson Sampling.
+Deep learning experience with CNNs, MLPs, and Transformers in PyTorch.
+Some knoledge with experimental design and A/B testing.
+
+# Optimization
+Expertise in large-scale convex optimization.
+Experience with ADMM, primal-dual methods, interior point methods, and Lagrangian duality.
+Experience with linear programming, and operations research.
+Experience with derivative-free optimization, exponential search, binary search, and Voronoi-based spatial optimization.
+Experience with online convex optimization, online learning, and Bregman-style algorithms.
+Experience with projection-free / Frank-Wolfe-style optimization under functional constraints.
+Experience with real-time control and real-time allocation for storage and inventory systems.
+
+# Quantitative analysis
+Experience with time series analysis.
+Experience with stochastic processes and Monte Carlo methods.
+Experience with portfolio optimization.
+Experience with hypothesis testing and statistics.
+
+# Publications
+First author of "Nonsmooth Projection-Free Optimization with Functional Constraints," Computational Optimization and Applications (COAP), 2024.
+First author of "Bregman-Style Online Convex Optimization with Energy-Harvesting Constraints," ACM SIGMETRICS / POMACS, 2021.
+Author of "Bandit-Based Rate Adaptation for a Single-Server Queue," (under review), 2026.
+Author of "Identifying Arguments of Space–Time Fractional Diffusion: A Data-Driven Approach," Frontiers in Applied Mathematics and Statistics, 2020.
+First author of "Automatic Identification of Optimum Infill Well Placement using Voronoi Networks and Metaheuristic Optimizers," SPE Western Regional Meeting, 2026.
+First author of "Intelligent Systems Approach for Optimum Fracturing Treatment Design," SPE Western Regional Meeting, 2026.
