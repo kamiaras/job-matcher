@@ -1,0 +1,96 @@
+{
+  "titles": [
+    "Quantitative Researcher",
+    "Data Scientist",
+    "Research Engineer",
+    "Research Scientist",
+    "ML Engineer",
+    "ML Scientist"
+  ],
+  "companies": {
+    "tech": [
+      "Google",
+      "Meta",
+      "Apple",
+      "Microsoft",
+      "Amazon",
+      "NVIDIA",
+      "OpenAI",
+      "Anthropic",
+      "DeepMind",
+      "Apple ML Research",
+      "IBM Research",
+      "Adobe Research"
+    ],
+    "quant_finance": [
+      "Jane Street",
+      "Two Sigma",
+      "Citadel",
+      "Hudson River Trading",
+      "Jump Trading",
+      "D. E. Shaw",
+      "Renaissance Technologies",
+      "Point72",
+      "Virtu Financial",
+      "Optiver"
+    ],
+    "startups": [
+      "Scale AI",
+      "Cohere",
+      "Hugging Face",
+      "Anyscale",
+      "Weights & Biases",
+      "Databricks",
+      "Together AI",
+      "Mistral AI",
+      "Perplexity",
+      "xAI"
+    ]
+  },
+  "websites": [
+    {
+      "name": "OpenAI Careers (Greenhouse)",
+      "type": "greenhouse",
+      "board_token": "openai",
+      "url": "https://boards.greenhouse.io/openai"
+    },
+    {
+      "name": "Anthropic Careers (Greenhouse)",
+      "type": "greenhouse",
+      "board_token": "anthropic",
+      "url": "https://boards.greenhouse.io/anthropic"
+    },
+    {
+      "name": "DeepMind Careers (Greenhouse)",
+      "type": "greenhouse",
+      "board_token": "deepmind",
+      "url": "https://boards.greenhouse.io/deepmind"
+    },
+    {
+      "name": "Jane Street Careers",
+      "type": "placeholder",
+      "url": "https://www.janestreet.com/join-jane-street/open-roles/"
+    },
+    {
+      "name": "Two Sigma Careers",
+      "type": "placeholder",
+      "url": "https://www.twosigma.com/careers/"
+    },
+    {
+      "name": "LinkedIn Job Search (documentation target)",
+      "type": "documentation",
+      "url": "https://www.linkedin.com/jobs/search/?keywords=quantitative%20researcher&location=United%20States"
+    },
+    {
+      "name": "Indeed Job Search (documentation target)",
+      "type": "documentation",
+      "url": "https://www.indeed.com/jobs?q=machine+learning+scientist&l=United+States"
+    },
+    {
+      "name": "Lever example (documentation target)",
+      "type": "documentation",
+      "url": "https://jobs.lever.co/"
+    }
+  ],
+  "location_requirement": "US"
+}

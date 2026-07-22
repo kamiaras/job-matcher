@@ -1,0 +1,10 @@
+Ph.D. Candidate in Electrical and Computer Engineering (Minor in Industrial and Systems Engineering).
+Expertise in machine learning, mathematical optimization, convex optimization, sequential decision-making, and control.
+Research focus on multi-armed bandits, online convex optimization, and time series analysis.
+Strong Python skills including data engineering pipelines, Pandas, NumPy, and Scikit-Learn.
+Professional experience as an AI Fellow, Data Analyst, and Seismic Imaging Analyst.
+
+# Append additional experience lines below (one per line).
+# Blank lines and lines starting with # are ignored.
+
+
