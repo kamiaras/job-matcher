@@ -1,0 +1,361 @@
+#!/usr/bin/env python3
+"""Daily job matcher: fetch → dedupe → strict LLM match → persist seen_jobs.json."""
+
+from __future__ import annotations
+
+import json
+import os
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+import requests
+from dotenv import load_dotenv
+from google import genai
+from pydantic import BaseModel, Field
+
+ROOT = Path(__file__).resolve().parent
+CONFIG_PATH = ROOT / "config.json"
+RESUME_PATH = ROOT / "resume.txt"
+SEEN_PATH = ROOT / "seen_jobs.json"
+
+load_dotenv(ROOT / ".env")
+
+SYSTEM_PROMPT = """You are a strict job-requirements matcher. Nothing more, nothing less.
+
+Rules:
+1. Compare ONLY the job's Requirements section against the candidate's resume lines.
+2. Also verify the job location is in the US (including remote-US / nationwide US). Reject non-US locations.
+3. Explicitly IGNORE salary, benefits, culture, perks, company description, and any "nice to have" framing that is outside Requirements.
+4. Do NOT soft-match preferences or infer skills that are not clearly supported by a resume line.
+5. A job is a match only if every hard requirement in the Requirements section is supported by the resume AND the location is US-eligible.
+6. List any unmet hard requirements in missing_requirements. If is_match is true, missing_requirements should be empty.
+7. Keep reason short (one or two sentences).
+"""
+
+
+class MatchResult(BaseModel):
+    is_match: bool
+    missing_requirements: list[str] = Field(default_factory=list)
+    reason: str
+
+
+def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
+    with path.open(encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_resume(path: Path = RESUME_PATH) -> list[str]:
+    lines: list[str] = []
+    with path.open(encoding="utf-8") as f:
+        for raw in f:
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            lines.append(line)
+    return lines
+
+
+def load_seen(path: Path = SEEN_PATH) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    with path.open(encoding="utf-8") as f:
+        data = json.load(f)
+    return data if isinstance(data, dict) else {}
+
+
+def save_seen(seen: dict[str, Any], path: Path = SEEN_PATH) -> None:
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(seen, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
+
+def normalize_job(
+    *,
+    job_id: str,
+    title: str,
+    company: str,
+    url: str,
+    location: str = "",
+    requirements: str = "",
+) -> dict[str, str]:
+    return {
+        "id": job_id,
+        "title": title,
+        "company": company,
+        "url": url,
+        "location": location or "",
+        "requirements": requirements or "",
+    }
+
+
+def fetch_greenhouse(board_token: str, company: str | None = None) -> list[dict[str, str]]:
+    """Fetch jobs from Greenhouse public boards API."""
+    api_url = f"https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs"
+    try:
+        resp = requests.get(api_url, params={"content": "true"}, timeout=30)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        print(f"[greenhouse:{board_token}] fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    payload = resp.json()
+    jobs_raw = payload.get("jobs") or []
+    company_name = company or board_token
+    jobs: list[dict[str, str]] = []
+
+    for item in jobs_raw:
+        job_id = str(item.get("id") or item.get("absolute_url") or "")
+        if not job_id:
+            continue
+        location = ""
+        loc = item.get("location")
+        if isinstance(loc, dict):
+            location = loc.get("name") or ""
+        elif isinstance(loc, str):
+            location = loc
+
+        # Greenhouse sometimes embeds HTML content; keep as requirements text.
+        requirements = (item.get("content") or item.get("description") or "").strip()
+        jobs.append(
+            normalize_job(
+                job_id=f"greenhouse:{board_token}:{job_id}",
+                title=(item.get("title") or "").strip() or "Untitled",
+                company=company_name,
+                url=(item.get("absolute_url") or "").strip(),
+                location=location,
+                requirements=requirements,
+            )
+        )
+    print(f"[greenhouse:{board_token}] fetched {len(jobs)} jobs")
+    return jobs
+
+
+def fetch_placeholder(config: dict[str, Any]) -> list[dict[str, str]]:
+    """Sample jobs so the pipeline can be smoke-tested when live sources return nothing."""
+    titles = config.get("titles") or ["Research Scientist"]
+    sample_title = titles[0]
+    return [
+        normalize_job(
+            job_id="placeholder:sample-us-match",
+            title=sample_title,
+            company="Example Labs",
+            url="https://example.com/jobs/sample-us-match",
+            location="Remote, United States",
+            requirements=(
+                "Requirements:\n"
+                "- Ph.D. in Electrical and Computer Engineering or related field\n"
+                "- Experience with machine learning and mathematical optimization\n"
+                "- Strong Python skills (Pandas, NumPy, Scikit-Learn)\n"
+                "- Research experience in sequential decision-making or bandits\n"
+            ),
+        ),
+        normalize_job(
+            job_id="placeholder:sample-eu-reject",
+            title="ML Engineer",
+            company="Example EU GmbH",
+            url="https://example.com/jobs/sample-eu-reject",
+            location="Berlin, Germany",
+            requirements=(
+                "Requirements:\n"
+                "- 5+ years production ML experience\n"
+                "- Ph.D. preferred\n"
+                "- Must be based in Germany\n"
+            ),
+        ),
+        normalize_job(
+            job_id="placeholder:sample-missing-skills",
+            title="Quantitative Researcher",
+            company="Example Quant",
+            url="https://example.com/jobs/sample-missing-skills",
+            location="New York, NY, United States",
+            requirements=(
+                "Requirements:\n"
+                "- 3+ years of C++ low-latency trading systems experience\n"
+                "- Deep expertise in FPGA hardware acceleration\n"
+                "- Prior market-making desk experience required\n"
+            ),
+        ),
+    ]
+
+
+def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
+    """Orchestrate all configured sources; fall back to placeholders if empty."""
+    jobs: list[dict[str, str]] = []
+    seen_ids: set[str] = set()
+
+    for site in config.get("websites") or []:
+        site_type = (site.get("type") or "").lower()
+        if site_type == "greenhouse":
+            token = site.get("board_token")
+            if not token:
+                continue
+            company = site.get("name") or token
+            for job in fetch_greenhouse(token, company=company):
+                if job["id"] in seen_ids:
+                    continue
+                seen_ids.add(job["id"])
+                jobs.append(job)
+        elif site_type in {"placeholder", "documentation"}:
+            # Documentation / non-API targets are skipped at fetch time.
+            continue
+
+    if not jobs:
+        print("[fetch] no live jobs returned; using placeholder samples")
+        for job in fetch_placeholder(config):
+            if job["id"] not in seen_ids:
+                seen_ids.add(job["id"])
+                jobs.append(job)
+
+    return jobs
+
+
+def filter_unseen(jobs: list[dict[str, str]], seen: dict[str, Any]) -> list[dict[str, str]]:
+    return [job for job in jobs if job["id"] not in seen]
+
+
+def match_job(
+    job: dict[str, str],
+    resume_lines: list[str],
+    client: genai.Client,
+    *,
+    model: str,
+    location_requirement: str = "US",
+) -> MatchResult:
+    user_prompt = (
+        f"Location requirement: {location_requirement}\n\n"
+        f"Job title: {job.get('title', '')}\n"
+        f"Company: {job.get('company', '')}\n"
+        f"Listed location: {job.get('location', '')}\n"
+        f"URL: {job.get('url', '')}\n\n"
+        f"Requirements section:\n{job.get('requirements') or '(empty)'}\n\n"
+        f"Resume lines:\n" + "\n".join(f"- {line}" for line in resume_lines)
+    )
+
+    response = client.models.generate_content(
+        model=model,
+        contents=f"{SYSTEM_PROMPT}\n\n{user_prompt}",
+        config={
+            "response_mime_type": "application/json",
+            "response_schema": MatchResult,
+        },
+    )
+
+    raw = (response.text or "").strip()
+    if not raw:
+        return MatchResult(
+            is_match=False,
+            missing_requirements=["LLM returned no structured output"],
+            reason="Failed to parse structured match result.",
+        )
+    return MatchResult.model_validate_json(raw)
+
+
+def write_github_summary(matches: list[dict[str, Any]]) -> None:
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not summary_path:
+        return
+
+    lines = [
+        "## Job matches",
+        "",
+    ]
+    if not matches:
+        lines.append("_No matches today._")
+    else:
+        lines.extend(
+            [
+                "| Title | Company | Location | URL | Reason |",
+                "| --- | --- | --- | --- | --- |",
+            ]
+        )
+        for m in matches:
+            title = (m.get("title") or "").replace("|", "\\|")
+            company = (m.get("company") or "").replace("|", "\\|")
+            location = (m.get("location") or "").replace("|", "\\|")
+            url = m.get("url") or ""
+            reason = (m.get("reason") or "").replace("|", "\\|").replace("\n", " ")
+            link = f"[link]({url})" if url else ""
+            lines.append(f"| {title} | {company} | {location} | {link} | {reason} |")
+
+    lines.append("")
+    with open(summary_path, "a", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
+def utc_now_iso() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def main() -> int:
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("ERROR: GEMINI_API_KEY is required (set in .env or environment)", file=sys.stderr)
+        return 1
+
+    model = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
+    config = load_config()
+    resume_lines = load_resume()
+    if not resume_lines:
+        print("ERROR: resume.txt has no usable experience lines", file=sys.stderr)
+        return 1
+
+    seen = load_seen()
+    all_jobs = fetch_jobs(config)
+    unseen = filter_unseen(all_jobs, seen)
+    print(f"Fetched {len(all_jobs)} jobs; {len(unseen)} unseen")
+
+    client = genai.Client(api_key=api_key)
+    location_requirement = config.get("location_requirement") or "US"
+    matches: list[dict[str, Any]] = []
+    now = utc_now_iso()
+
+    for job in unseen:
+        try:
+            result = match_job(
+                job,
+                resume_lines,
+                client,
+                model=model,
+                location_requirement=location_requirement,
+            )
+        except Exception as exc:  # noqa: BLE001 — keep run going on single-job failures
+            print(f"[match] failed for {job.get('id')}: {exc}", file=sys.stderr)
+            result = MatchResult(
+                is_match=False,
+                missing_requirements=["matcher_error"],
+                reason=f"Matcher error: {exc}",
+            )
+
+        seen[job["id"]] = {
+            "title": job.get("title", ""),
+            "company": job.get("company", ""),
+            "url": job.get("url", ""),
+            "matched": bool(result.is_match),
+            "seen_at": now,
+        }
+
+        status = "MATCH" if result.is_match else "skip"
+        print(f"[{status}] {job.get('company')} — {job.get('title')}: {result.reason}")
+
+        if result.is_match:
+            matches.append(
+                {
+                    "title": job.get("title", ""),
+                    "company": job.get("company", ""),
+                    "location": job.get("location", ""),
+                    "url": job.get("url", ""),
+                    "reason": result.reason,
+                    "missing_requirements": result.missing_requirements,
+                }
+            )
+
+    save_seen(seen)
+    write_github_summary(matches)
+    print(f"Done. {len(matches)} match(es). Updated {SEEN_PATH.name}.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
