@@ -54,5 +54,285 @@
     "url": "https://job-boards.greenhouse.io/anthropic/jobs/4610158008",
     "matched": false,
     "seen_at": "2026-07-23T01:02:45Z"
+  },
+  "greenhouse:anthropic:4949336008": {
+    "title": "ML/Research Engineer, Safeguards",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4949336008",
+    "matched": true,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5098025008": {
+    "title": "Model Performance Software Engineer, Claude Code",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5098025008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5257820008": {
+    "title": "People Research Scientist, People",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5257820008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5362838008": {
+    "title": "People Research Scientist, Recruiting",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5362838008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4935314008": {
+    "title": "Recruiter, AI Research",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4935314008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5231612008": {
+    "title": "Research Engineer, Chip Design RL (Reinforcement Learning)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5231612008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5254364008": {
+    "title": "Research Engineer, Code RL (Reinforcement Learning)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5254364008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5285246008": {
+    "title": "Research Engineer, Computer Use",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5285246008",
+    "matched": true,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4669581008": {
+    "title": "Research Engineer, Discovery",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4669581008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5271380008": {
+    "title": "Research Engineer, Domain Scaling",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5271380008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5071132008": {
+    "title": "Research Engineer, Economic Research Data Platform",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5071132008",
+    "matched": true,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4980430008": {
+    "title": "Research Engineer, Interpretability",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4980430008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5197337008": {
+    "title": "Research Engineer, Knowledge Foundations",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5197337008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4017331008": {
+    "title": "Research Engineer, Knowledge Team",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4017331008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5265365008": {
+    "title": "Research Engineer, Life Sciences",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5265365008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5115935008": {
+    "title": "Research Engineer, Machine Learning (Reinforcement Learning)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5115935008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4613568008": {
+    "title": "Research Engineer, Machine Learning (Reinforcement Learning)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4613568008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5198074008": {
+    "title": "Research Engineer, Machine Learning (RL Velocity)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5198074008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5198108008": {
+    "title": "Research Engineer, Machine Learning (RL Velocity)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5198108008",
+    "matched": true,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5198255008": {
+    "title": "Research Engineer, Model Evaluations",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5198255008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5160330008": {
+    "title": "Research Engineer, Performance RL (Reinforcement Learning)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5160330008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5119713008": {
+    "title": "Research Engineer, Pretraining",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5119713008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4938432008": {
+    "title": "Research Engineer, Pretraining Scaling",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4938432008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4938436008": {
+    "title": "Research Engineer, Pretraining Scaling - London",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4938436008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5112018008": {
+    "title": "Research Engineer, Production Model Post-Training",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5112018008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4613592008": {
+    "title": "Research Engineer, Production Model Post-Training",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4613592008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5135168008": {
+    "title": "Research Engineer / Research Scientist, Pre-training",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5135168008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4616971008": {
+    "title": "Research Engineer/Research Scientist, Pre-training",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4616971008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4951814008": {
+    "title": "Research Engineer / Research Scientist, Tokens",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4951814008",
+    "matched": true,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5264619008": {
+    "title": "Research Engineer, RL Scaling Science",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5264619008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4631822008": {
+    "title": "Research Engineer / Scientist, Alignment",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4631822008",
+    "matched": true,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5076477008": {
+    "title": "Research Engineer / Scientist, Frontier Red Team (Cyber)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5076477008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5061517008": {
+    "title": "Research Engineer, Universes",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5061517008",
+    "matched": true,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5074217008": {
+    "title": "Research Engineer, Visual Knowledge Work",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5074217008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5066977008": {
+    "title": "Research Scientist/Engineer, Biological Safety",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5066977008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4980427008": {
+    "title": "Research Scientist, Interpretability",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4980427008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5239733008": {
+    "title": "Research Scientist, Life Sciences",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5239733008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5357739008": {
+    "title": "Research Scientist, Life Sciences (Computational)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5357739008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:4595463008": {
+    "title": "Security Software Engineer, Detection & Response Platform",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4595463008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:anthropic:5109273008": {
+    "title": "Software Engineer, Human Data Interface",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5109273008",
+    "matched": false,
+    "seen_at": "2026-07-23T10:26:09Z"
   }
 }
