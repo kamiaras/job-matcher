@@ -1,5 +1,6 @@
 {
   "titles": [
+    "Graduate",
     "Quantitative Researcher",
     "Quantitative Engineer",
     "Quantitative Scientist",
@@ -22,14 +23,13 @@
     "Research Intern",
     "PhD",
     "Postdoctoral",
-    "Postdoc",
-    "Software Engineer",
-    "Software Developer",
-    "Software",
-    "SWE",
-    "SDE"
+    "Postdoc"
   ],
   "title_exclusions": [
+    "Quantitative Software Developer",
+    "MacOS",
+    "GUI",
+    "NLP",
     "Senior",
     "Sr",
     "Staff",
@@ -43,14 +43,167 @@
     "Distinguished",
     "Architect",
     "backend",
+    "Front-end",
     "frontend",
+    "Front End",
     "full stack",
     "full-stack",
+    "Fullstack",
     "intern",
     "internship",
     "internship program",
     "Investigator",
-    "cybersecurity"
+    "cybersecurity",
+    "Security",
+    "Supercomputing",
+    "Marketing",
+    "Hardware",
+    "Distributed",
+    "GPU",
+    "CUDA",
+    "CUDNN",
+    "Training",
+    "Post-Training",
+    "Post-Training Inference",
+    "Post-Training Inference Engineer",
+    "Post-Training Inference Scientist",
+    "Post-Training Inference Researcher",
+    "Post-Training Inference Engineer",
+    "Post-Training Inference Scientist",
+    "Post-Training Inference Researcher",
+    "inference",
+    "Robotics",
+    "Autonomous",
+    "Autonomous Systems",
+    "Autonomous Vehicle",
+    "Autonomous Vehicles",
+    "Autonomous Vehicle Systems",
+    "Autonomous Vehicle Systems Engineer",
+    "Autonomous Vehicle Systems Scientist",
+    "Autonomous Vehicle Systems Researcher",
+    "People",
+    "Recruiter",
+    "Recruiting",
+    "Life Sciences",
+    "Biological",
+    "Biology",
+    "Materials Science",
+    "Tutor",
+    "Economist",
+    "Campus",
+    "Perception",
+    "Mapping",
+    "Fleet",
+    "Planner",
+    "Sensor",
+    "Driver",
+    "Quality Ops",
+    "Site Reliability",
+    "SRE",
+    "Forward Deployed",
+    "Chip Design",
+    "GTM",
+    "Red Team",
+    "Personal AGI",
+    "Computer Use",
+    "Multimodal",
+    "Visual Knowledge",
+    "Human Understanding",
+    "Developer Experience",
+    "Customer Engineering",
+    "Privacy",
+    "Retrieval",
+    "Search",
+    "Knowledge Graph",
+    "Safeguards",
+    "Preparedness",
+    "Alignment",
+    "Business",
+    "Product",
+    "Products",
+    "Identity",
+    "B2B",
+    "Policy",
+    "Supply",
+    "Developer Productivity",
+    "Simulation Realism",
+    "Depot Automation",
+    "Autonomy",
+    "Trajectory"
+  ],
+  "non_us_locations": [
+    "United Kingdom",
+    "UK",
+    "England",
+    "London",
+    "Canada",
+    "Toronto",
+    "Montreal",
+    "Vancouver",
+    "Calgary",
+    "India",
+    "Bengaluru",
+    "Bangalore",
+    "Hyderabad",
+    "Karnataka",
+    "Hong Kong",
+    "Singapore",
+    "Taiwan",
+    "Taipei",
+    "Hsinchu",
+    "China",
+    "Shanghai",
+    "Beijing",
+    "Japan",
+    "Tokyo",
+    "South Korea",
+    "Seoul",
+    "Australia",
+    "Sydney",
+    "Canberra",
+    "Melbourne",
+    "New Zealand",
+    "Ireland",
+    "Dublin",
+    "IE",
+    "Germany",
+    "Munich",
+    "Berlin",
+    "France",
+    "Paris",
+    "Netherlands",
+    "Amsterdam",
+    "Spain",
+    "Madrid",
+    "Sweden",
+    "Stockholm",
+    "Norway",
+    "Oslo",
+    "Switzerland",
+    "Zürich",
+    "Zurich",
+    "CH",
+    "Poland",
+    "Warsaw",
+    "Lithuania",
+    "Vilnius",
+    "Israel",
+    "Tel Aviv",
+    "United Arab Emirates",
+    "UAE",
+    "Dubai",
+    "Abu Dhabi",
+    "Qatar",
+    "Doha",
+    "Mexico",
+    "Mexico City",
+    "MX",
+    "Argentina",
+    "Uruguay",
+    "Brazil",
+    "Europe",
+    "EMEA",
+    "APAC"
   ],
   "companies": {
     "tech": [
@@ -69,7 +222,9 @@
       "Lyft",
       "Databricks",
       "Dropbox",
-      "Palantir"
+      "Palantir",
+      "Netflix",
+      "Uber"
     ],
     "quant_finance": [
       "Jane Street",
@@ -326,6 +481,29 @@
       "url": "https://jobs.lever.co/zoox"
     },
     {
+      "name": "Netflix",
+      "type": "eightfold",
+      "domain": "netflix.com",
+      "host": "explore.jobs.netflix.net",
+      "url": "https://explore.jobs.netflix.net/careers"
+    },
+    {
+      "name": "Google",
+      "type": "google",
+      "company": "Google",
+      "url": "https://www.google.com/about/careers/applications/jobs/results/"
+    },
+    {
+      "name": "Meta",
+      "type": "meta",
+      "url": "https://www.metacareers.com/jobsearch/"
+    },
+    {
+      "name": "Uber",
+      "type": "uber",
+      "url": "https://jobs.uber.com/en/jobs/"
+    },
+    {
       "name": "Two Sigma Careers",
       "type": "placeholder",
       "url": "https://www.twosigma.com/careers/"
@@ -359,6 +537,123 @@
       "name": "Mistral AI Careers",
       "type": "placeholder",
       "url": "https://mistral.ai/careers"
+    },
+    {
+      "name": "Databricks",
+      "type": "greenhouse",
+      "board_token": "databricks",
+      "url": "https://boards.greenhouse.io/databricks"
+    },
+    {
+      "name": "Stripe",
+      "type": "greenhouse",
+      "board_token": "stripe",
+      "url": "https://boards.greenhouse.io/stripe"
+    },
+    {
+      "name": "Airbnb",
+      "type": "greenhouse",
+      "board_token": "airbnb",
+      "url": "https://boards.greenhouse.io/airbnb"
+    },
+    {
+      "name": "IMC",
+      "type": "greenhouse",
+      "board_token": "imc",
+      "url": "https://boards.greenhouse.io/imc"
+    },
+    {
+      "name": "Tower Research",
+      "type": "greenhouse",
+      "board_token": "towerresearchcapital",
+      "url": "https://boards.greenhouse.io/towerresearchcapital"
+    },
+    {
+      "name": "DRW",
+      "type": "greenhouse",
+      "board_token": "drweng",
+      "url": "https://boards.greenhouse.io/drweng"
+    },
+    {
+      "name": "Akuna",
+      "type": "greenhouse",
+      "board_token": "akunacapital",
+      "url": "https://boards.greenhouse.io/akunacapital"
+    },
+    {
+      "name": "Spotify",
+      "type": "lever",
+      "site": "spotify",
+      "url": "https://jobs.lever.co/spotify"
+    },
+    {
+      "name": "Apple",
+      "type": "apple",
+      "url": "https://jobs.apple.com/en-us/search"
+    },
+    {
+      "name": "Amazon",
+      "type": "amazon",
+      "url": "https://www.amazon.jobs/"
+    },
+    {
+      "name": "Microsoft",
+      "type": "microsoft",
+      "domain": "microsoft.com",
+      "host": "apply.careers.microsoft.com",
+      "url": "https://apply.careers.microsoft.com/careers/jobs"
+    },
+    {
+      "name": "NVIDIA",
+      "type": "workday",
+      "myworkday_host": "nvidia.wd5.myworkdayjobs.com",
+      "site": "NVIDIAExternalCareerSite",
+      "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite"
+    },
+    {
+      "name": "TikTok",
+      "type": "bytedance",
+      "host": "jobs.bytedance.com",
+      "portal_type": 2,
+      "keyword": "TikTok",
+      "url": "https://lifeattiktok.com/search"
+    },
+    {
+      "name": "ByteDance",
+      "type": "bytedance",
+      "host": "jobs.bytedance.com",
+      "portal_type": 2,
+      "url": "https://jobs.bytedance.com/en/position"
+    },
+    {
+      "name": "Susquehanna (SIG)",
+      "type": "icims_api",
+      "api_url": "https://careers.sig.com/api/jobs",
+      "url": "https://careers.sig.com/"
+    },
+    {
+      "name": "Citadel Securities",
+      "type": "citadel_securities",
+      "url": "https://www.citadelsecurities.com/careers/open-opportunities/"
+    },
+    {
+      "name": "Bloomberg",
+      "type": "bloomberg",
+      "search_url": "https://bloomberg.avature.net/careers/SearchJobs/",
+      "url": "https://bloomberg.avature.net/careers/SearchJobs/"
+    },
+    {
+      "name": "LinkedIn",
+      "type": "linkedin",
+      "company_ids": "1337",
+      "url": "https://careers.linkedin.com/"
+    },
+    {
+      "name": "Snap",
+      "type": "workday",
+      "myworkday_host": "snapchat.wd1.myworkdayjobs.com",
+      "site": "Snap",
+      "url": "https://snapchat.wd1.myworkdayjobs.com/Snap"
     }
   ],
   "location_requirement": "US"
