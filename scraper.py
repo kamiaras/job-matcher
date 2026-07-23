@@ -23,8 +23,10 @@ CONFIG_PATH = ROOT / "config.json"
 RESUME_PATH = ROOT / "resume.txt"
 SEEN_PATH = ROOT / "seen_jobs.json"
 
-# Free-tier Gemini Flash is typically ~5 RPM; pace requests accordingly.
-DEFAULT_REQUEST_INTERVAL_SEC = 13.0
+# Free-tier Gemini Flash is typically ~5 RPM per model; pace requests accordingly.
+# Two Flash-Lite models share the work so each model's quota can be used.
+DEFAULT_MODELS = ("gemini-3.5-flash-lite", "gemini-3.1-flash-lite")
+DEFAULT_REQUEST_INTERVAL_SEC = 7.0
 DEFAULT_MAX_RETRIES = 8
 DEFAULT_MAX_JOBS_PER_RUN = 40
 
@@ -500,15 +502,26 @@ def retry_sleep_seconds(exc: BaseException, attempt: int) -> float:
     return min(2**attempt, 60.0)
 
 
+def parse_models() -> list[str]:
+    """Resolve Gemini model list from GEMINI_MODELS or GEMINI_MODEL."""
+    raw = os.environ.get("GEMINI_MODELS") or os.environ.get("GEMINI_MODEL") or ""
+    models = [m.strip() for m in raw.split(",") if m.strip()]
+    return models or list(DEFAULT_MODELS)
+
+
 def match_job(
     job: dict[str, str],
     resume_lines: list[str],
     client: genai.Client,
     *,
-    model: str,
+    models: list[str],
     location_requirement: str = "US",
     max_retries: int = DEFAULT_MAX_RETRIES,
+    model_start_index: int = 0,
 ) -> MatchResult:
+    if not models:
+        raise ValueError("models must not be empty")
+
     user_prompt = (
         f"Location requirement: {location_requirement}\n\n"
         f"Job title: {job.get('title', '')}\n"
@@ -521,6 +534,7 @@ def match_job(
 
     attempts = max(1, max_retries)
     for attempt in range(1, attempts + 1):
+        model = models[(model_start_index + attempt - 1) % len(models)]
         try:
             response = client.models.generate_content(
                 model=model,
@@ -533,9 +547,18 @@ def match_job(
             break
         except Exception as exc:  # noqa: BLE001 — classify rate limits vs hard failures
             if is_rate_limit_error(exc) and attempt < attempts:
+                next_model = models[(model_start_index + attempt) % len(models)]
+                # Quotas are per-model: finish a full model cycle before sleeping.
+                if len(models) > 1 and (attempt % len(models)) != 0:
+                    print(
+                        f"[match] 429 on {model} for {job.get('id')}; "
+                        f"trying {next_model} ({attempt}/{attempts})",
+                        file=sys.stderr,
+                    )
+                    continue
                 delay = retry_sleep_seconds(exc, attempt)
                 print(
-                    f"[match] 429 for {job.get('id')}; "
+                    f"[match] 429 on {model} for {job.get('id')}; "
                     f"retry {attempt}/{attempts} in {delay:.0f}s",
                     file=sys.stderr,
                 )
@@ -597,7 +620,7 @@ def main() -> int:
         print("ERROR: GEMINI_API_KEY is required (set in .env or environment)", file=sys.stderr)
         return 1
 
-    model = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
+    models = parse_models()
     request_interval = _env_float("GEMINI_REQUEST_INTERVAL_SEC", DEFAULT_REQUEST_INTERVAL_SEC)
     max_retries = _env_int("GEMINI_MAX_RETRIES", DEFAULT_MAX_RETRIES)
     max_jobs = _env_int("GEMINI_MAX_JOBS_PER_RUN", DEFAULT_MAX_JOBS_PER_RUN)
@@ -610,6 +633,7 @@ def main() -> int:
     seen = load_seen()
     all_jobs = fetch_jobs(config)
     unseen = filter_unseen(all_jobs, seen)
+    print(f"[models] {', '.join(models)}")
     if max_jobs > 0 and len(unseen) > max_jobs:
         print(
             f"Fetched {len(all_jobs)} jobs; {len(unseen)} unseen; "
@@ -634,9 +658,10 @@ def main() -> int:
                 job,
                 resume_lines,
                 client,
-                model=model,
+                models=models,
                 location_requirement=location_requirement,
                 max_retries=max_retries,
+                model_start_index=index % len(models),
             )
         except Exception as exc:  # noqa: BLE001 — keep run going on single-job failures
             print(f"[match] failed for {job.get('id')}: {exc}", file=sys.stderr)
