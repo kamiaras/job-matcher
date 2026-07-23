@@ -132,6 +132,136 @@ def fetch_greenhouse(board_token: str, company: str | None = None) -> list[dict[
     return jobs
 
 
+def fetch_ashby(board_name: str, company: str | None = None) -> list[dict[str, str]]:
+    """Fetch jobs from Ashby public job posting API."""
+    api_url = f"https://api.ashbyhq.com/posting-api/job-board/{board_name}"
+    try:
+        resp = requests.get(api_url, timeout=30)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        print(f"[ashby:{board_name}] fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    payload = resp.json()
+    jobs_raw = payload.get("jobs") or []
+    company_name = company or board_name
+    jobs: list[dict[str, str]] = []
+
+    for item in jobs_raw:
+        if item.get("isListed") is False:
+            continue
+        job_id = str(item.get("id") or item.get("jobUrl") or "")
+        if not job_id:
+            continue
+
+        location = (item.get("location") or "").strip()
+        secondary = item.get("secondaryLocations") or []
+        if isinstance(secondary, list) and secondary:
+            extras = [
+                (s.get("location") if isinstance(s, dict) else str(s) or "").strip()
+                for s in secondary
+            ]
+            extras = [e for e in extras if e]
+            if extras:
+                location = ", ".join([location, *extras] if location else extras)
+
+        if item.get("isRemote") or (item.get("workplaceType") or "").lower() == "remote":
+            if location and "remote" not in location.lower():
+                location = f"{location} (Remote)"
+            elif not location:
+                location = "Remote"
+
+        requirements = (item.get("descriptionPlain") or item.get("descriptionHtml") or "").strip()
+        jobs.append(
+            normalize_job(
+                job_id=f"ashby:{board_name}:{job_id}",
+                title=(item.get("title") or "").strip() or "Untitled",
+                company=company_name,
+                url=(item.get("jobUrl") or item.get("applyUrl") or "").strip(),
+                location=location,
+                requirements=requirements,
+            )
+        )
+    print(f"[ashby:{board_name}] fetched {len(jobs)} jobs")
+    return jobs
+
+
+def _lever_requirements(item: dict[str, Any]) -> str:
+    """Combine Lever plain description + section lists into one requirements blob."""
+    parts: list[str] = []
+    plain = (item.get("descriptionPlain") or item.get("description") or "").strip()
+    if plain:
+        parts.append(plain)
+
+    for section in item.get("lists") or []:
+        if not isinstance(section, dict):
+            continue
+        heading = (section.get("text") or "").strip()
+        content = (section.get("content") or "").strip()
+        if heading and content:
+            parts.append(f"{heading}\n{content}")
+        elif content:
+            parts.append(content)
+
+    additional = (item.get("additionalPlain") or item.get("additional") or "").strip()
+    if additional:
+        parts.append(additional)
+    return "\n\n".join(parts).strip()
+
+
+def fetch_lever(site: str, company: str | None = None) -> list[dict[str, str]]:
+    """Fetch jobs from Lever public postings API."""
+    api_url = f"https://api.lever.co/v0/postings/{site}"
+    try:
+        resp = requests.get(api_url, params={"mode": "json"}, timeout=30)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        print(f"[lever:{site}] fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    payload = resp.json()
+    jobs_raw = payload if isinstance(payload, list) else (payload.get("data") or [])
+    company_name = company or site
+    jobs: list[dict[str, str]] = []
+
+    for item in jobs_raw:
+        if not isinstance(item, dict):
+            continue
+        job_id = str(item.get("id") or item.get("hostedUrl") or "")
+        if not job_id:
+            continue
+
+        categories = item.get("categories") or {}
+        location = ""
+        if isinstance(categories, dict):
+            location = (categories.get("location") or "").strip()
+            all_locs = categories.get("allLocations") or []
+            if isinstance(all_locs, list) and all_locs:
+                joined = ", ".join(str(x) for x in all_locs if x)
+                if joined:
+                    location = joined
+
+        workplace = (item.get("workplaceType") or "").strip()
+        if workplace and workplace.lower() == "remote":
+            if location and "remote" not in location.lower():
+                location = f"{location} (Remote)"
+            elif not location:
+                location = "Remote"
+
+        jobs.append(
+            normalize_job(
+                job_id=f"lever:{site}:{job_id}",
+                title=(item.get("text") or "").strip() or "Untitled",
+                company=company_name,
+                url=(item.get("hostedUrl") or item.get("applyUrl") or "").strip(),
+                location=location,
+                requirements=_lever_requirements(item),
+            )
+        )
+    print(f"[lever:{site}] fetched {len(jobs)} jobs")
+    return jobs
+
+
 def fetch_placeholder(config: dict[str, Any]) -> list[dict[str, str]]:
     """Sample jobs so the pipeline can be smoke-tested when live sources return nothing."""
     titles = config.get("titles") or ["Research Scientist"]
@@ -180,26 +310,78 @@ def fetch_placeholder(config: dict[str, Any]) -> list[dict[str, str]]:
     ]
 
 
+def _normalize_title_text(text: str) -> str:
+    """Lowercase and expand common ML/AI abbreviations for substring matching."""
+    t = (text or "").lower()
+    replacements = (
+        ("machine learning", " ml "),
+        ("artificial intelligence", " ai "),
+        ("ops research", " operations research "),
+        ("post-doc", " postdoc "),
+        ("post doctoral", " postdoc "),
+        ("phd", " phd "),
+        ("ph.d.", " phd "),
+        ("ph.d", " phd "),
+    )
+    for old, new in replacements:
+        t = t.replace(old, new)
+    return " ".join(t.split())
+
+
+def title_matches(job_title: str, titles: list[str]) -> bool:
+    """True if job title contains any configured title phrase (fuzzy on ML/AI)."""
+    if not titles:
+        return True
+    normalized_job = _normalize_title_text(job_title)
+    for want in titles:
+        needle = _normalize_title_text(want)
+        if needle and needle in normalized_job:
+            return True
+    return False
+
+
 def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
     """Orchestrate all configured sources; fall back to placeholders if empty."""
     jobs: list[dict[str, str]] = []
     seen_ids: set[str] = set()
+    titles = [t for t in (config.get("titles") or []) if isinstance(t, str) and t.strip()]
 
     for site in config.get("websites") or []:
         site_type = (site.get("type") or "").lower()
+        company = site.get("name") or ""
+
         if site_type == "greenhouse":
             token = site.get("board_token")
             if not token:
                 continue
-            company = site.get("name") or token
-            for job in fetch_greenhouse(token, company=company):
-                if job["id"] in seen_ids:
-                    continue
-                seen_ids.add(job["id"])
-                jobs.append(job)
+            fetched = fetch_greenhouse(token, company=company or token)
+        elif site_type == "ashby":
+            board = site.get("board_name") or site.get("board_token")
+            if not board:
+                continue
+            fetched = fetch_ashby(board, company=company or board)
+        elif site_type == "lever":
+            lever_site = site.get("site") or site.get("board_token")
+            if not lever_site:
+                continue
+            fetched = fetch_lever(lever_site, company=company or lever_site)
         elif site_type in {"placeholder", "documentation"}:
             # Documentation / non-API targets are skipped at fetch time.
             continue
+        else:
+            print(f"[fetch] unknown site type {site_type!r} for {company or site}", file=sys.stderr)
+            continue
+
+        for job in fetched:
+            if job["id"] in seen_ids:
+                continue
+            seen_ids.add(job["id"])
+            jobs.append(job)
+
+    if titles:
+        before = len(jobs)
+        jobs = [job for job in jobs if title_matches(job.get("title", ""), titles)]
+        print(f"[filter] title match kept {len(jobs)}/{before} jobs")
 
     if not jobs:
         print("[fetch] no live jobs returned; using placeholder samples")
