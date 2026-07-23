@@ -29,6 +29,9 @@ jobs:
         run: python scraper.py
 
       - name: Commit seen_jobs memory
+        # Keep partial progress if the matcher step fails mid-run (jobs already
+        # sent to the LLM are in seen_jobs.json and must not be re-scored).
+        if: always()
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update seen_jobs memory"
