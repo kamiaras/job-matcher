@@ -10,7 +10,8 @@ stdout and `candidates.json`. **Does not call Gemini** and **does not update**
 1. **Fetch** openings from companies in `config.json` (Greenhouse / Ashby / Lever /
    Workable / Eightfold / Google Careers / Meta / Uber / Workday / Amazon / Apple /
    Microsoft / ByteDance / iCIMS API / Bloomberg Avature / LinkedIn / Citadel +
-   Citadel Securities HTML / Two Sigma Avature / D. E. Shaw / Hudson River Trading).
+   Citadel Securities HTML / Two Sigma Avature / D. E. Shaw / Hudson River Trading /
+   Goldman Sachs Higher GraphQL / Oracle Cloud CE e.g. JPMorgan).
 2. **Title match** — keep jobs whose titles match phrases in `titles`.
 3. **Title exclusion** — drop seniority / role markers in `title_exclusions`.
 4. **US location** — drop postings that only list places in `non_us_locations`; keep
