@@ -11,6 +11,7 @@ import json
 import os
 import re
 import sys
+import uuid
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from html import unescape
 from pathlib import Path
@@ -2047,6 +2048,250 @@ def fetch_placeholder(config: dict[str, Any]) -> list[dict[str, str]]:
     ]
 
 
+_GOLDMAN_GRAPHQL_URL = "https://api-higher.gs.com/gateway/api/v1/graphql"
+_GOLDMAN_ROLE_SEARCH_QUERY = """
+query GetRoles($searchQueryInput: RoleSearchQueryInput!) {
+  roleSearch(searchQueryInput: $searchQueryInput) {
+    totalCount
+    page { pageNumber pageSize hasNext }
+    items {
+      roleId
+      jobTitle
+      corporateTitle
+      division
+      jobFunction
+      shortDescription
+      locations { city state country primary }
+    }
+  }
+}
+""".strip()
+
+
+def _goldman_format_location(locs: Any) -> str:
+    """Join Goldman Higher location objects into a display string."""
+    if not isinstance(locs, list) or not locs:
+        return ""
+    parts: list[str] = []
+    for loc in locs:
+        if not isinstance(loc, dict):
+            continue
+        bits = [loc.get("city") or "", loc.get("state") or "", loc.get("country") or ""]
+        label = ", ".join(b for b in bits if b)
+        if label and label not in parts:
+            parts.append(label)
+    return " | ".join(parts)
+
+
+def fetch_goldman(
+    company: str | None = None,
+    *,
+    graphql_url: str = _GOLDMAN_GRAPHQL_URL,
+    page_size: int = 50,
+    experiences: list[str] | None = None,
+) -> list[dict[str, str]]:
+    """Fetch roles from Goldman Sachs Higher GraphQL (api-higher.gs.com)."""
+    company_name = company or "Goldman Sachs"
+    exp = experiences or ["PROFESSIONAL", "EARLY_CAREER"]
+    jobs: list[dict[str, str]] = []
+    page_number = 1
+    total: int | None = None
+
+    while True:
+        headers = {
+            **_BROWSER_HEADERS,
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Origin": "https://higher.gs.com",
+            "Referer": "https://higher.gs.com/results",
+            "x-higher-request-id": str(uuid.uuid4()),
+            "x-higher-session-id": str(uuid.uuid4()),
+        }
+        variables = {
+            "searchQueryInput": {
+                "page": {"pageNumber": page_number, "pageSize": page_size},
+                "sort": {"sortStrategy": "RELEVANCE", "sortOrder": "DESC"},
+                "experiences": exp,
+            }
+        }
+        try:
+            resp = requests.post(
+                graphql_url,
+                headers=headers,
+                json={
+                    "operationName": "GetRoles",
+                    "query": _GOLDMAN_ROLE_SEARCH_QUERY,
+                    "variables": variables,
+                },
+                timeout=45,
+            )
+            resp.raise_for_status()
+        except requests.RequestException as exc:
+            print(f"[goldman] fetch failed at page={page_number}: {exc}", file=sys.stderr)
+            break
+
+        try:
+            payload = resp.json()
+        except ValueError as exc:
+            print(f"[goldman] invalid JSON at page={page_number}: {exc}", file=sys.stderr)
+            break
+
+        if payload.get("errors"):
+            print(f"[goldman] GraphQL errors at page={page_number}: {payload['errors']}", file=sys.stderr)
+            break
+
+        data = (payload.get("data") or {}).get("roleSearch") or {}
+        if total is None:
+            try:
+                total = int(data.get("totalCount")) if data.get("totalCount") is not None else None
+            except (TypeError, ValueError):
+                total = None
+
+        items = data.get("items") or []
+        if not items:
+            break
+
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            role_id = str(item.get("roleId") or "").strip()
+            title = (item.get("jobTitle") or "").strip()
+            if not role_id or not title:
+                continue
+            desc = unescape(str(item.get("shortDescription") or ""))
+            desc = re.sub(r"<[^>]+>", " ", desc)
+            desc = re.sub(r"\s+", " ", desc).strip()
+            jobs.append(
+                normalize_job(
+                    job_id=f"goldman:{role_id}",
+                    title=title,
+                    company=company_name,
+                    url=f"https://higher.gs.com/roles/{role_id}",
+                    location=_goldman_format_location(item.get("locations")),
+                    requirements=desc,
+                )
+            )
+
+        page_meta = data.get("page") or {}
+        has_next = bool(page_meta.get("hasNext"))
+        if not has_next:
+            break
+        if total is not None and len(jobs) >= total:
+            break
+        page_number += 1
+        if page_number > 500:
+            break
+
+    print(f"[goldman] fetched {len(jobs)} jobs")
+    return jobs
+
+
+def fetch_oracle_cloud(
+    host: str,
+    site_number: str,
+    company: str | None = None,
+    *,
+    page_size: int = 200,
+) -> list[dict[str, str]]:
+    """Fetch jobs from an Oracle Cloud HCM Candidate Experience board (e.g. JPMorgan)."""
+    host = host.replace("https://", "").replace("http://", "").strip("/")
+    company_name = company or host
+    jobs: list[dict[str, str]] = []
+    seen: set[str] = set()
+    offset = 0
+    total: int | None = None
+    # Finder separators must stay unencoded (; = ,) or Oracle returns empty/errors.
+    base = (
+        f"https://{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions"
+        f"?onlyData=true&expand=requisitionList"
+        f"&finder=findReqs;siteNumber={site_number},limit={int(page_size)},offset="
+    )
+    empty_streak = 0
+
+    while True:
+        try:
+            resp = requests.get(
+                f"{base}{offset}",
+                headers={**_BROWSER_HEADERS, "Accept": "application/json"},
+                timeout=60,
+            )
+            resp.raise_for_status()
+        except requests.RequestException as exc:
+            print(
+                f"[oracle_cloud:{site_number}] fetch failed at offset={offset}: {exc}",
+                file=sys.stderr,
+            )
+            break
+
+        try:
+            payload = resp.json()
+        except ValueError as exc:
+            print(
+                f"[oracle_cloud:{site_number}] invalid JSON at offset={offset}: {exc}",
+                file=sys.stderr,
+            )
+            break
+
+        top = (payload.get("items") or [None])[0]
+        if not isinstance(top, dict):
+            break
+
+        if total is None:
+            try:
+                total = int(top["TotalJobsCount"]) if top.get("TotalJobsCount") is not None else None
+            except (TypeError, ValueError):
+                total = None
+
+        requisitions = top.get("requisitionList") or []
+        if not isinstance(requisitions, list) or not requisitions:
+            empty_streak += 1
+            if empty_streak >= 2:
+                break
+            offset += page_size
+            if total is not None and offset >= total:
+                break
+            continue
+        empty_streak = 0
+
+        for item in requisitions:
+            if not isinstance(item, dict):
+                continue
+            job_id = str(item.get("Id") or "").strip()
+            title = (item.get("Title") or "").strip()
+            if not job_id or not title or job_id in seen:
+                continue
+            seen.add(job_id)
+            location = (item.get("PrimaryLocation") or "").strip()
+            workplace = (item.get("WorkplaceType") or "").strip()
+            if workplace and workplace.lower() not in location.lower():
+                location = f"{location} ({workplace})" if location else workplace
+            reqs = (item.get("ShortDescriptionStr") or "").strip()
+            jobs.append(
+                normalize_job(
+                    job_id=f"oracle_cloud:{site_number}:{job_id}",
+                    title=title,
+                    company=company_name,
+                    url=(
+                        f"https://{host}/hcmUI/CandidateExperience/en/sites/"
+                        f"{site_number}/job/{job_id}"
+                    ),
+                    location=location,
+                    requirements=reqs,
+                )
+            )
+
+        # Advance by requested page size — Oracle may return fewer than `limit`
+        # mid-stream without being finished.
+        offset += page_size
+        if total is not None and offset >= total:
+            break
+        if offset > 20000:
+            break
+
+    print(f"[oracle_cloud:{site_number}] fetched {len(jobs)} jobs")
+    return jobs
+
+
 def _normalize_title_text(text: str) -> str:
     """Lowercase and expand common ML/AI abbreviations for substring matching."""
     t = (text or "").lower()
@@ -2345,6 +2590,24 @@ def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
                     company=company or "Hudson River Trading",
                     careers_url=site.get("url")
                     or "https://www.hudsonrivertrading.com/careers/",
+                )
+            elif site_type == "goldman":
+                fetched = fetch_goldman(
+                    company=company or "Goldman Sachs",
+                    graphql_url=site.get("graphql_url") or _GOLDMAN_GRAPHQL_URL,
+                    experiences=site.get("experiences") or None,
+                )
+            elif site_type == "oracle_cloud":
+                host = site.get("host")
+                site_number = site.get("site_number") or site.get("siteNumber")
+                if not host and site.get("url"):
+                    host = urlparse(site["url"]).netloc
+                if not host or not site_number:
+                    continue
+                fetched = fetch_oracle_cloud(
+                    host,
+                    str(site_number),
+                    company=company or host,
                 )
             elif site_type in {"placeholder", "documentation"}:
                 # Documentation / non-API targets are skipped at fetch time.
