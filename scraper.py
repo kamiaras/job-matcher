@@ -7,6 +7,7 @@ import json
 import os
 import re
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -14,12 +15,18 @@ from typing import Any
 import requests
 from dotenv import load_dotenv
 from google import genai
+from google.genai import errors as genai_errors
 from pydantic import BaseModel, Field
 
 ROOT = Path(__file__).resolve().parent
 CONFIG_PATH = ROOT / "config.json"
 RESUME_PATH = ROOT / "resume.txt"
 SEEN_PATH = ROOT / "seen_jobs.json"
+
+# Free-tier Gemini Flash is typically ~5 RPM; pace requests accordingly.
+DEFAULT_REQUEST_INTERVAL_SEC = 13.0
+DEFAULT_MAX_RETRIES = 8
+DEFAULT_MAX_JOBS_PER_RUN = 40
 
 load_dotenv(ROOT / ".env")
 
@@ -426,6 +433,73 @@ def filter_unseen(jobs: list[dict[str, str]], seen: dict[str, Any]) -> list[dict
     return [job for job in jobs if job["id"] not in seen]
 
 
+def _env_float(name: str, default: float) -> float:
+    raw = os.environ.get(name)
+    if raw is None or not raw.strip():
+        return default
+    try:
+        return float(raw)
+    except ValueError:
+        return default
+
+
+def _env_int(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None or not raw.strip():
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        return default
+
+
+def is_rate_limit_error(exc: BaseException) -> bool:
+    if isinstance(exc, genai_errors.APIError) and exc.code == 429:
+        return True
+    text = str(exc).lower()
+    return "429" in text or "resource_exhausted" in text or "too many requests" in text
+
+
+def _parse_retry_delay_seconds(exc: BaseException) -> float | None:
+    """Extract server-suggested wait from Gemini RetryInfo / error message."""
+    details = getattr(exc, "details", None)
+    candidates: list[Any] = []
+    if isinstance(details, dict):
+        err = details.get("error") if isinstance(details.get("error"), dict) else details
+        if isinstance(err, dict):
+            nested = err.get("details")
+            if isinstance(nested, list):
+                candidates.extend(nested)
+            msg = err.get("message")
+            if isinstance(msg, str):
+                candidates.append({"message": msg})
+    candidates.append({"message": str(exc)})
+
+    for item in candidates:
+        if isinstance(item, dict):
+            delay = item.get("retryDelay")
+            if isinstance(delay, str):
+                m = re.fullmatch(r"(\d+(?:\.\d+)?)s?", delay.strip())
+                if m:
+                    return float(m.group(1))
+            if isinstance(delay, (int, float)):
+                return float(delay)
+            msg = item.get("message")
+            if isinstance(msg, str):
+                m = re.search(r"retry in\s+(\d+(?:\.\d+)?)\s*s", msg, re.I)
+                if m:
+                    return float(m.group(1))
+    return None
+
+
+def retry_sleep_seconds(exc: BaseException, attempt: int) -> float:
+    """Prefer API retryDelay; otherwise exponential backoff with a sane ceiling."""
+    suggested = _parse_retry_delay_seconds(exc)
+    if suggested is not None:
+        return min(max(suggested, 1.0) + 1.0, 120.0)
+    return min(2**attempt, 60.0)
+
+
 def match_job(
     job: dict[str, str],
     resume_lines: list[str],
@@ -433,6 +507,7 @@ def match_job(
     *,
     model: str,
     location_requirement: str = "US",
+    max_retries: int = DEFAULT_MAX_RETRIES,
 ) -> MatchResult:
     user_prompt = (
         f"Location requirement: {location_requirement}\n\n"
@@ -444,14 +519,31 @@ def match_job(
         f"Resume lines:\n" + "\n".join(f"- {line}" for line in resume_lines)
     )
 
-    response = client.models.generate_content(
-        model=model,
-        contents=f"{SYSTEM_PROMPT}\n\n{user_prompt}",
-        config={
-            "response_mime_type": "application/json",
-            "response_schema": MatchResult,
-        },
-    )
+    attempts = max(1, max_retries)
+    for attempt in range(1, attempts + 1):
+        try:
+            response = client.models.generate_content(
+                model=model,
+                contents=f"{SYSTEM_PROMPT}\n\n{user_prompt}",
+                config={
+                    "response_mime_type": "application/json",
+                    "response_schema": MatchResult,
+                },
+            )
+            break
+        except Exception as exc:  # noqa: BLE001 — classify rate limits vs hard failures
+            if is_rate_limit_error(exc) and attempt < attempts:
+                delay = retry_sleep_seconds(exc, attempt)
+                print(
+                    f"[match] 429 for {job.get('id')}; "
+                    f"retry {attempt}/{attempts} in {delay:.0f}s",
+                    file=sys.stderr,
+                )
+                time.sleep(delay)
+                continue
+            raise
+    else:
+        raise RuntimeError(f"match_job exhausted retries for {job.get('id')}")
 
     raw = (response.text or "").strip()
     if not raw:
@@ -506,6 +598,9 @@ def main() -> int:
         return 1
 
     model = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
+    request_interval = _env_float("GEMINI_REQUEST_INTERVAL_SEC", DEFAULT_REQUEST_INTERVAL_SEC)
+    max_retries = _env_int("GEMINI_MAX_RETRIES", DEFAULT_MAX_RETRIES)
+    max_jobs = _env_int("GEMINI_MAX_JOBS_PER_RUN", DEFAULT_MAX_JOBS_PER_RUN)
     config = load_config()
     resume_lines = load_resume()
     if not resume_lines:
@@ -515,14 +610,25 @@ def main() -> int:
     seen = load_seen()
     all_jobs = fetch_jobs(config)
     unseen = filter_unseen(all_jobs, seen)
-    print(f"Fetched {len(all_jobs)} jobs; {len(unseen)} unseen")
+    if max_jobs > 0 and len(unseen) > max_jobs:
+        print(
+            f"Fetched {len(all_jobs)} jobs; {len(unseen)} unseen; "
+            f"scoring {max_jobs} this run (GEMINI_MAX_JOBS_PER_RUN)"
+        )
+        unseen = unseen[:max_jobs]
+    else:
+        print(f"Fetched {len(all_jobs)} jobs; {len(unseen)} unseen")
 
     client = genai.Client(api_key=api_key)
     location_requirement = config.get("location_requirement") or "US"
     matches: list[dict[str, Any]] = []
     now = utc_now_iso()
+    stopped_for_rate_limit = False
 
-    for job in unseen:
+    for index, job in enumerate(unseen):
+        if index > 0 and request_interval > 0:
+            time.sleep(request_interval)
+
         try:
             result = match_job(
                 job,
@@ -530,15 +636,26 @@ def main() -> int:
                 client,
                 model=model,
                 location_requirement=location_requirement,
+                max_retries=max_retries,
             )
         except Exception as exc:  # noqa: BLE001 — keep run going on single-job failures
             print(f"[match] failed for {job.get('id')}: {exc}", file=sys.stderr)
+            if is_rate_limit_error(exc):
+                # Leave this job (and the rest) unseen so the next run can retry.
+                stopped_for_rate_limit = True
+                print(
+                    "[match] rate limited after retries; "
+                    "leaving remaining jobs unseen for the next run",
+                    file=sys.stderr,
+                )
+                break
             result = MatchResult(
                 is_match=False,
                 missing_requirements=["matcher_error"],
                 reason=f"Matcher error: {exc}",
             )
 
+        # Record every LLM-evaluated job (match or not) so it is never re-scored.
         seen[job["id"]] = {
             "title": job.get("title", ""),
             "company": job.get("company", ""),
@@ -546,6 +663,8 @@ def main() -> int:
             "matched": bool(result.is_match),
             "seen_at": now,
         }
+        # Persist immediately so a mid-run crash/timeout does not re-send these.
+        save_seen(seen)
 
         status = "MATCH" if result.is_match else "skip"
         print(f"[{status}] {job.get('company')} — {job.get('title')}: {result.reason}")
@@ -562,8 +681,13 @@ def main() -> int:
                 }
             )
 
-    save_seen(seen)
     write_github_summary(matches)
+    if stopped_for_rate_limit:
+        print(
+            f"Stopped early due to rate limits. {len(matches)} match(es). "
+            f"Updated {SEEN_PATH.name}."
+        )
+        return 0
     print(f"Done. {len(matches)} match(es). Updated {SEEN_PATH.name}.")
     return 0
 

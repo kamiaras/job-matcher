@@ -55,8 +55,12 @@ If live boards return nothing, a few placeholder sample jobs exercise the matche
 ## Optional
 
 - Override the model with `GEMINI_MODEL` (default: `gemini-flash-latest`).
+- Pace Gemini calls with `GEMINI_REQUEST_INTERVAL_SEC` (default: `13`, ~5 RPM free-tier safe).
+- Cap work per run with `GEMINI_MAX_JOBS_PER_RUN` (default: `40`); leftovers stay unseen for the next run.
+- Tune 429 retries with `GEMINI_MAX_RETRIES` (default: `8`). Rate-limited jobs are **not** written to `seen_jobs.json`.
 
 ## Notes
 
 - Titles in `config.json` pre-filter before the LLM runs (keeps API spend down).
+- Free-tier Gemini often allows only ~5 requests/minute; the scraper backs off on `429 RESOURCE_EXHAUSTED` and stops early rather than burning unseen jobs.
 - Never commit `.env` — it is listed in `.gitignore`.
