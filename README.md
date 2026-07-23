@@ -27,7 +27,7 @@ Daily GitHub Actions pipeline that fetches jobs, strictly matches requirements a
    ```
 
 3. **Edit targeting and resume**:
-   - `config.json` — titles, companies, Greenhouse board tokens / job-board URLs, `location_requirement`
+   - `config.json` — titles, companies, ATS boards (`greenhouse` / `ashby` / `lever`), `location_requirement`
    - `resume.txt` — one experience line per line (`#` comments and blank lines are ignored)
 
 4. **Run the workflow**:
@@ -43,7 +43,7 @@ Daily GitHub Actions pipeline that fetches jobs, strictly matches requirements a
 
 ## Notes
 
-- Greenhouse boards fetch via the public API when configured in `config.json`.
+- Live ATS fetchers: Greenhouse (`board_token`), Ashby (`board_name`), Lever (`site`).
+- Titles in `config.json` pre-filter jobs before the LLM runs (keeps API spend down).
 - If live sources return nothing, placeholder sample jobs exercise the matcher end-to-end.
-- LinkedIn / Indeed / Lever URLs in config are documentation targets until you plug in real fetchers.
 - Never commit `.env` — it is listed in `.gitignore`.

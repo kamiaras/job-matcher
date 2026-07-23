@@ -1,11 +1,30 @@
 {
   "titles": [
     "Quantitative Researcher",
-    "Data Scientist",
+    "Quantitative Engineer",
+    "Quantitative Scientist",
     "Research Engineer",
     "Research Scientist",
+    "Applied Scientist",
+    "Optimization Engineer",
+    "Optimization Scientist",
+    "Optimization Researcher",
+    "Operations Research",
+    "Data Scientist",
+    "Machine Learning Engineer",
+    "Machine Learning Scientist",
+    "Machine Learning Researcher",
     "ML Engineer",
-    "ML Scientist"
+    "ML Scientist",
+    "ML Researcher",
+    "AI Engineer",
+    "AI Scientist",
+    "AI Researcher",
+    "AI Research",
+    "Research Intern",
+    "PhD Intern",
+    "Postdoctoral",
+    "Postdoc"
   ],
   "companies": {
     "tech": [
@@ -18,9 +37,13 @@
       "OpenAI",
       "Anthropic",
       "DeepMind",
-      "Apple ML Research",
-      "IBM Research",
-      "Adobe Research"
+      "Waymo",
+      "Stripe",
+      "Airbnb",
+      "Lyft",
+      "Databricks",
+      "Dropbox",
+      "Palantir"
     ],
     "quant_finance": [
       "Jane Street",
@@ -32,44 +55,249 @@
       "Renaissance Technologies",
       "Point72",
       "Virtu Financial",
-      "Optiver"
+      "Optiver",
+      "Robinhood"
     ],
     "startups": [
       "Scale AI",
-      "Cohere",
-      "Hugging Face",
-      "Anyscale",
-      "Weights & Biases",
-      "Databricks",
       "Together AI",
-      "Mistral AI",
+      "xAI",
+      "Cohere",
+      "Anyscale",
       "Perplexity",
-      "xAI"
+      "Cursor",
+      "LangChain",
+      "Pinecone",
+      "Modal",
+      "Fireworks AI",
+      "RunPod",
+      "Thinking Machines",
+      "Sierra",
+      "Character.AI",
+      "Midjourney",
+      "Nomic",
+      "Writer",
+      "Supabase",
+      "Temporal",
+      "Airbyte",
+      "Monte Carlo",
+      "Shield AI",
+      "Zoox",
+      "Hugging Face",
+      "Weights & Biases",
+      "Mistral AI"
     ]
   },
   "websites": [
     {
-      "name": "OpenAI Careers (Greenhouse)",
-      "type": "greenhouse",
-      "board_token": "openai",
-      "url": "https://boards.greenhouse.io/openai"
-    },
-    {
-      "name": "Anthropic Careers (Greenhouse)",
+      "name": "Anthropic",
       "type": "greenhouse",
       "board_token": "anthropic",
       "url": "https://boards.greenhouse.io/anthropic"
     },
     {
-      "name": "DeepMind Careers (Greenhouse)",
+      "name": "DeepMind",
       "type": "greenhouse",
       "board_token": "deepmind",
       "url": "https://boards.greenhouse.io/deepmind"
     },
     {
-      "name": "Jane Street Careers",
-      "type": "placeholder",
-      "url": "https://www.janestreet.com/join-jane-street/open-roles/"
+      "name": "Jane Street",
+      "type": "greenhouse",
+      "board_token": "janestreet",
+      "url": "https://boards.greenhouse.io/janestreet"
+    },
+    {
+      "name": "Jump Trading",
+      "type": "greenhouse",
+      "board_token": "jumptrading",
+      "url": "https://boards.greenhouse.io/jumptrading"
+    },
+    {
+      "name": "Point72",
+      "type": "greenhouse",
+      "board_token": "point72",
+      "url": "https://boards.greenhouse.io/point72"
+    },
+    {
+      "name": "Virtu Financial",
+      "type": "greenhouse",
+      "board_token": "virtu",
+      "url": "https://boards.greenhouse.io/virtu"
+    },
+    {
+      "name": "Optiver",
+      "type": "greenhouse",
+      "board_token": "optiver",
+      "url": "https://boards.greenhouse.io/optiver"
+    },
+    {
+      "name": "Robinhood",
+      "type": "greenhouse",
+      "board_token": "robinhood",
+      "url": "https://boards.greenhouse.io/robinhood"
+    },
+    {
+      "name": "Scale AI",
+      "type": "greenhouse",
+      "board_token": "scaleai",
+      "url": "https://boards.greenhouse.io/scaleai"
+    },
+    {
+      "name": "Together AI",
+      "type": "greenhouse",
+      "board_token": "togetherai",
+      "url": "https://boards.greenhouse.io/togetherai"
+    },
+    {
+      "name": "xAI",
+      "type": "greenhouse",
+      "board_token": "xai",
+      "url": "https://boards.greenhouse.io/xai"
+    },
+    {
+      "name": "Waymo",
+      "type": "greenhouse",
+      "board_token": "waymo",
+      "url": "https://boards.greenhouse.io/waymo"
+    },
+    {
+      "name": "OpenAI",
+      "type": "ashby",
+      "board_name": "openai",
+      "url": "https://jobs.ashbyhq.com/openai"
+    },
+    {
+      "name": "Cohere",
+      "type": "ashby",
+      "board_name": "cohere",
+      "url": "https://jobs.ashbyhq.com/cohere"
+    },
+    {
+      "name": "Anyscale",
+      "type": "ashby",
+      "board_name": "anyscale",
+      "url": "https://jobs.ashbyhq.com/anyscale"
+    },
+    {
+      "name": "Perplexity",
+      "type": "ashby",
+      "board_name": "perplexity",
+      "url": "https://jobs.ashbyhq.com/perplexity"
+    },
+    {
+      "name": "Cursor",
+      "type": "ashby",
+      "board_name": "cursor",
+      "url": "https://jobs.ashbyhq.com/cursor"
+    },
+    {
+      "name": "LangChain",
+      "type": "ashby",
+      "board_name": "langchain",
+      "url": "https://jobs.ashbyhq.com/langchain"
+    },
+    {
+      "name": "Pinecone",
+      "type": "ashby",
+      "board_name": "pinecone",
+      "url": "https://jobs.ashbyhq.com/pinecone"
+    },
+    {
+      "name": "Modal",
+      "type": "ashby",
+      "board_name": "modal",
+      "url": "https://jobs.ashbyhq.com/modal"
+    },
+    {
+      "name": "Fireworks AI",
+      "type": "ashby",
+      "board_name": "fireworksai",
+      "url": "https://jobs.ashbyhq.com/fireworksai"
+    },
+    {
+      "name": "RunPod",
+      "type": "ashby",
+      "board_name": "runpod",
+      "url": "https://jobs.ashbyhq.com/runpod"
+    },
+    {
+      "name": "Thinking Machines",
+      "type": "ashby",
+      "board_name": "thinking-machines",
+      "url": "https://jobs.ashbyhq.com/thinking-machines"
+    },
+    {
+      "name": "Sierra",
+      "type": "ashby",
+      "board_name": "sierra",
+      "url": "https://jobs.ashbyhq.com/sierra"
+    },
+    {
+      "name": "Character.AI",
+      "type": "ashby",
+      "board_name": "character",
+      "url": "https://jobs.ashbyhq.com/character"
+    },
+    {
+      "name": "Midjourney",
+      "type": "ashby",
+      "board_name": "midjourney",
+      "url": "https://jobs.ashbyhq.com/midjourney"
+    },
+    {
+      "name": "Nomic",
+      "type": "ashby",
+      "board_name": "nomic",
+      "url": "https://jobs.ashbyhq.com/nomic"
+    },
+    {
+      "name": "Writer",
+      "type": "ashby",
+      "board_name": "writer",
+      "url": "https://jobs.ashbyhq.com/writer"
+    },
+    {
+      "name": "Supabase",
+      "type": "ashby",
+      "board_name": "supabase",
+      "url": "https://jobs.ashbyhq.com/supabase"
+    },
+    {
+      "name": "Temporal",
+      "type": "ashby",
+      "board_name": "temporal",
+      "url": "https://jobs.ashbyhq.com/temporal"
+    },
+    {
+      "name": "Airbyte",
+      "type": "ashby",
+      "board_name": "airbyte",
+      "url": "https://jobs.ashbyhq.com/airbyte"
+    },
+    {
+      "name": "Monte Carlo",
+      "type": "ashby",
+      "board_name": "montecarlodata",
+      "url": "https://jobs.ashbyhq.com/montecarlodata"
+    },
+    {
+      "name": "Palantir",
+      "type": "lever",
+      "site": "palantir",
+      "url": "https://jobs.lever.co/palantir"
+    },
+    {
+      "name": "Shield AI",
+      "type": "lever",
+      "site": "shieldai",
+      "url": "https://jobs.lever.co/shieldai"
+    },
+    {
+      "name": "Zoox",
+      "type": "lever",
+      "site": "zoox",
+      "url": "https://jobs.lever.co/zoox"
     },
     {
       "name": "Two Sigma Careers",
@@ -77,19 +305,34 @@
       "url": "https://www.twosigma.com/careers/"
     },
     {
-      "name": "LinkedIn Job Search (documentation target)",
-      "type": "documentation",
-      "url": "https://www.linkedin.com/jobs/search/?keywords=quantitative%20researcher&location=United%20States"
+      "name": "Citadel Careers",
+      "type": "placeholder",
+      "url": "https://www.citadel.com/careers/"
     },
     {
-      "name": "Indeed Job Search (documentation target)",
-      "type": "documentation",
-      "url": "https://www.indeed.com/jobs?q=machine+learning+scientist&l=United+States"
+      "name": "Hudson River Trading Careers",
+      "type": "placeholder",
+      "url": "https://www.hudsonrivertrading.com/careers/"
     },
     {
-      "name": "Lever example (documentation target)",
-      "type": "documentation",
-      "url": "https://jobs.lever.co/"
+      "name": "D. E. Shaw Careers",
+      "type": "placeholder",
+      "url": "https://www.deshaw.com/careers"
+    },
+    {
+      "name": "Hugging Face Careers",
+      "type": "placeholder",
+      "url": "https://huggingface.co/jobs"
+    },
+    {
+      "name": "Weights & Biases Careers",
+      "type": "placeholder",
+      "url": "https://wandb.ai/site/careers"
+    },
+    {
+      "name": "Mistral AI Careers",
+      "type": "placeholder",
+      "url": "https://mistral.ai/careers"
     }
   ],
   "location_requirement": "US"
