@@ -504,39 +504,44 @@
       "url": "https://jobs.uber.com/en/jobs/"
     },
     {
-      "name": "Two Sigma Careers",
-      "type": "placeholder",
-      "url": "https://www.twosigma.com/careers/"
+      "name": "Two Sigma",
+      "type": "twosigma",
+      "search_url": "https://careers.twosigma.com/careers/OpenRoles/",
+      "url": "https://careers.twosigma.com/careers/OpenRoles/"
     },
     {
-      "name": "Citadel Careers",
-      "type": "placeholder",
-      "url": "https://www.citadel.com/careers/"
+      "name": "Citadel",
+      "type": "citadel",
+      "url": "https://www.citadel.com/careers/open-opportunities/"
     },
     {
-      "name": "Hudson River Trading Careers",
-      "type": "placeholder",
+      "name": "Hudson River Trading",
+      "type": "hrt",
       "url": "https://www.hudsonrivertrading.com/careers/"
     },
     {
-      "name": "D. E. Shaw Careers",
-      "type": "placeholder",
+      "name": "D. E. Shaw",
+      "type": "deshaw",
       "url": "https://www.deshaw.com/careers"
     },
     {
-      "name": "Hugging Face Careers",
-      "type": "placeholder",
-      "url": "https://huggingface.co/jobs"
+      "name": "Hugging Face",
+      "type": "workable",
+      "account": "huggingface",
+      "url": "https://apply.workable.com/huggingface/"
     },
     {
-      "name": "Weights & Biases Careers",
-      "type": "placeholder",
-      "url": "https://wandb.ai/site/careers"
+      "name": "Weights & Biases",
+      "type": "greenhouse",
+      "board_token": "coreweave",
+      "metadata_includes": ["W&B"],
+      "url": "https://www.coreweave.com/careers/weights-biases"
     },
     {
-      "name": "Mistral AI Careers",
-      "type": "placeholder",
-      "url": "https://mistral.ai/careers"
+      "name": "Mistral AI",
+      "type": "ashby",
+      "board_name": "mistral.ai",
+      "url": "https://jobs.ashbyhq.com/mistral.ai"
     },
     {
       "name": "Databricks",
