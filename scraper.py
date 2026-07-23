@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -340,11 +341,34 @@ def title_matches(job_title: str, titles: list[str]) -> bool:
     return False
 
 
+def title_excluded(job_title: str, exclusions: list[str]) -> bool:
+    """True if job title contains any seniority / experience-level exclusion phrase.
+
+    Uses word-boundary matching so short tokens like 'IV', 'Sr', or 'VP' do not
+    false-positive inside unrelated words (e.g. 'private', 'SRE').
+    """
+    if not exclusions:
+        return False
+    normalized_job = _normalize_title_text(job_title)
+    for phrase in exclusions:
+        needle = _normalize_title_text(phrase)
+        if not needle:
+            continue
+        # Escape so literals like 'Sr.' match safely; require token boundaries.
+        pattern = r"(?:^|[^a-z0-9])" + re.escape(needle) + r"(?:[^a-z0-9]|$)"
+        if re.search(pattern, normalized_job):
+            return True
+    return False
+
+
 def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
     """Orchestrate all configured sources; fall back to placeholders if empty."""
     jobs: list[dict[str, str]] = []
     seen_ids: set[str] = set()
     titles = [t for t in (config.get("titles") or []) if isinstance(t, str) and t.strip()]
+    exclusions = [
+        t for t in (config.get("title_exclusions") or []) if isinstance(t, str) and t.strip()
+    ]
 
     for site in config.get("websites") or []:
         site_type = (site.get("type") or "").lower()
@@ -382,6 +406,11 @@ def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
         before = len(jobs)
         jobs = [job for job in jobs if title_matches(job.get("title", ""), titles)]
         print(f"[filter] title match kept {len(jobs)}/{before} jobs")
+
+    if exclusions:
+        before = len(jobs)
+        jobs = [job for job in jobs if not title_excluded(job.get("title", ""), exclusions)]
+        print(f"[filter] title exclusion kept {len(jobs)}/{before} jobs")
 
     if not jobs:
         print("[fetch] no live jobs returned; using placeholder samples")

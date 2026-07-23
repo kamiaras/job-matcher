@@ -1,41 +1,56 @@
 # Automated Job Matching System
 
-Daily GitHub Actions pipeline that fetches jobs, strictly matches requirements against your resume lines via Gemini structured outputs, and records seen jobs in `seen_jobs.json`.
+A daily pipeline that scrapes public ATS job boards, filters for roles that match your target titles, and uses Gemini to strictly check each posting’s **requirements** against your resume. Matches show up in the GitHub Actions summary; every processed job is remembered in `seen_jobs.json` so it isn’t scored again.
+
+## What it does
+
+Each run (cron at 08:00 UTC, or manual workflow dispatch):
+
+1. **Fetch** openings from companies listed in `config.json` via public APIs:
+   - **Greenhouse** (`board_token`)
+   - **Ashby** (`board_name`)
+   - **Lever** (`site`)
+2. **Pre-filter by title** — keeps jobs whose titles match phrases in `config.json` (e.g. “PhD”, “Optimization”, “Software Engineer”), then drops seniority markers listed in `title_exclusions` (e.g. Senior, Staff, Principal), so the LLM isn’t called on every posting.
+3. **Skip already-seen jobs** — IDs stored in `seen_jobs.json` are ignored.
+4. **Strict LLM match** — Gemini compares the job’s requirements (and US location eligibility) to lines in `resume.txt`. Soft preferences, culture blurbs, and “nice to haves” are ignored; a job matches only if every hard requirement is supported by the resume.
+5. **Report & remember** — matches are written to the Actions run Summary; all evaluated jobs are appended to `seen_jobs.json` and committed back to `main`.
+
+If live boards return nothing, a few placeholder sample jobs exercise the matcher end-to-end.
+
+## Project layout
+
+| File | Role |
+| --- | --- |
+| `scraper.py` | Fetch → filter → match → persist |
+| `config.json` | Target titles, title exclusions, company ATS boards, location (`US`) |
+| `resume.txt` | One experience claim per line (`#` comments / blanks ignored) |
+| `seen_jobs.json` | Dedup memory of processed jobs |
+| `.github/workflows/daily_job_search.yml` | Daily GitHub Actions runner |
 
 ## Setup
 
-1. **Push this repo to GitHub** (ensure the default branch is `main`):
+1. **Push this repo to GitHub** (default branch `main`).
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial job matcher scaffold"
-   git branch -M main
-   git remote add origin git@github.com:<YOU>/<REPO>.git
-   git push -u origin main
-   ```
+2. **Add the repository secret** `GEMINI_API_KEY`  
+   GitHub → Settings → Secrets and variables → Actions → New repository secret.
 
-2. **Add the repository secret** `GEMINI_API_KEY`:
-   - GitHub → Settings → Secrets and variables → Actions → New repository secret
-   - Name: `GEMINI_API_KEY`
-   - Value: your Google Gemini API key
-
-   For local runs, put the same key in a gitignored `.env`:
+   For local runs:
 
    ```bash
    echo 'GEMINI_API_KEY=your_key_here' > .env
+   pip install -r requirements.txt
+   python scraper.py
    ```
 
-3. **Edit targeting and resume**:
-   - `config.json` — titles, companies, ATS boards (`greenhouse` / `ashby` / `lever`), `location_requirement`
-   - `resume.txt` — one experience line per line (`#` comments and blank lines are ignored)
+3. **Edit targeting and resume**
+   - `config.json` — titles, ATS boards, `location_requirement`
+   - `resume.txt` — atomic experience lines the matcher can cite
 
-4. **Run the workflow**:
-   - Actions → **Daily Job Search** → Run workflow (or wait for the daily cron at 08:00 UTC)
+4. **Run the workflow**  
+   Actions → **Daily Job Search** → Run workflow (or wait for the daily cron).
 
-5. **View results**:
-   - Matches appear in the Actions run **Summary** tab (`GITHUB_STEP_SUMMARY`)
-   - Memory of processed jobs is committed back to `main` in `seen_jobs.json`
+5. **View results**  
+   Matches appear in the Actions run **Summary** tab. Processed IDs land in `seen_jobs.json` on `main`.
 
 ## Optional
 
@@ -43,7 +58,5 @@ Daily GitHub Actions pipeline that fetches jobs, strictly matches requirements a
 
 ## Notes
 
-- Live ATS fetchers: Greenhouse (`board_token`), Ashby (`board_name`), Lever (`site`).
-- Titles in `config.json` pre-filter jobs before the LLM runs (keeps API spend down).
-- If live sources return nothing, placeholder sample jobs exercise the matcher end-to-end.
+- Titles in `config.json` pre-filter before the LLM runs (keeps API spend down).
 - Never commit `.env` — it is listed in `.gitignore`.
