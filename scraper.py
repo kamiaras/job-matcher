@@ -12,6 +12,7 @@ import os
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from html import unescape
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -61,8 +62,17 @@ def normalize_job(
     }
 
 
-def fetch_greenhouse(board_token: str, company: str | None = None) -> list[dict[str, str]]:
-    """Fetch jobs from Greenhouse public boards API."""
+def fetch_greenhouse(
+    board_token: str,
+    company: str | None = None,
+    *,
+    metadata_includes: list[str] | None = None,
+) -> list[dict[str, str]]:
+    """Fetch jobs from Greenhouse public boards API.
+
+    ``metadata_includes`` optionally keeps only jobs whose Greenhouse metadata
+    values contain any of the given needles (e.g. W&B roles on CoreWeave's board).
+    """
     api_url = f"https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs"
     try:
         resp = requests.get(api_url, params={"content": "true"}, timeout=30)
@@ -74,9 +84,19 @@ def fetch_greenhouse(board_token: str, company: str | None = None) -> list[dict[
     payload = resp.json()
     jobs_raw = payload.get("jobs") or []
     company_name = company or board_token
+    needles = [n.lower() for n in (metadata_includes or []) if n and str(n).strip()]
     jobs: list[dict[str, str]] = []
 
     for item in jobs_raw:
+        if needles:
+            meta_parts: list[str] = []
+            for meta in item.get("metadata") or []:
+                if isinstance(meta, dict) and meta.get("value") is not None:
+                    meta_parts.append(str(meta["value"]))
+            meta_blob = " ".join(meta_parts).lower()
+            if not any(n in meta_blob for n in needles):
+                continue
+
         job_id = str(item.get("id") or item.get("absolute_url") or "")
         if not job_id:
             continue
@@ -1469,24 +1489,80 @@ def fetch_linkedin(
 
 
 _CITADEL_CARD_RE = re.compile(
-    r'<a\s+class="careers-listing-card[^"]*"\s+href="([^"]+)"[^>]*>'
-    r'.*?aria-label="([^"]+)"[^>]*>'
-    r'.*?<div class="careers-listing-card__location">\s*([^<]*?)\s*</div>',
+    r'<a\s+([^>]*class="[^"]*careers-listing-card[^"]*"[^>]*)>(.*?)</a>',
     re.DOTALL | re.IGNORECASE,
 )
 
 
-def fetch_citadel_securities(
-    company: str | None = None,
-    *,
-    url: str = "https://www.citadelsecurities.com/careers/open-opportunities/",
-) -> list[dict[str, str]]:
-    """Fetch Citadel Securities open roles from the careers HTML listing.
+def _parse_citadel_listing_cards(html: str, *, id_prefix: str, company_name: str) -> list[dict[str, str]]:
+    """Parse Citadel / Citadel Securities evergreen careers-listing-card HTML."""
+    jobs: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for match in _CITADEL_CARD_RE.finditer(html):
+        attrs, body = match.group(1), match.group(2)
+        href_m = re.search(r'href="([^"]+)"', attrs)
+        if not href_m:
+            continue
+        href = href_m.group(1).strip()
 
-    Cloudflare often blocks plain ``requests``; uses curl_cffi when available.
-    Roles are evergreen detail pages (not per-requisition ATS IDs).
-    """
-    company_name = company or "Citadel Securities"
+        title = ""
+        for pat in (
+            r'data-position="([^"]+)"',
+            r'aria-label="([^"]+)"',
+            r'<h2[^>]*aria-label="([^"]+)"',
+            r"<h2[^>]*>([^<]+)",
+        ):
+            title_m = re.search(pat, attrs + body, re.IGNORECASE)
+            if title_m:
+                title = title_m.group(1)
+                break
+        if not title:
+            continue
+
+        title = unescape(title.replace("&#8211;", "–").replace("&amp;", "&"))
+        title = re.sub(r"^\s*Apply to\s+", "", title, flags=re.IGNORECASE)
+        title = re.sub(r"\s+", " ", title).strip()
+        if not title:
+            continue
+
+        loc_m = re.search(
+            r'careers-listing-card__location[^>]*>\s*([^<]+)',
+            body,
+            re.IGNORECASE,
+        )
+        location = re.sub(r"\s+", " ", loc_m.group(1)).strip() if loc_m else ""
+
+        slug = href.rstrip("/").rsplit("/", 1)[-1] or title
+        if slug in seen:
+            continue
+        seen.add(slug)
+
+        if href.startswith("/"):
+            # Prefer host from an absolute sibling URL in the same page when possible.
+            host_m = re.search(r'https://www\.(citadel(?:securities)?\.com)/', html)
+            host = host_m.group(0).rstrip("/") if host_m else "https://www.citadel.com"
+            href = f"{host}{href}"
+
+        jobs.append(
+            normalize_job(
+                job_id=f"{id_prefix}:{slug}",
+                title=title,
+                company=company_name,
+                url=href,
+                location=location,
+            )
+        )
+    return jobs
+
+
+def _fetch_citadel_html(
+    *,
+    url: str,
+    company_name: str,
+    id_prefix: str,
+    log_name: str,
+) -> list[dict[str, str]]:
+    """Fetch Citadel-family careers HTML (Cloudflare-prone; prefer curl_cffi)."""
     html = ""
     if curl_requests is not None:
         try:
@@ -1494,50 +1570,432 @@ def fetch_citadel_securities(
             resp.raise_for_status()
             html = resp.text
         except Exception as exc:
-            print(f"[citadel_securities] curl_cffi fetch failed: {exc}", file=sys.stderr)
+            print(f"[{log_name}] curl_cffi fetch failed: {exc}", file=sys.stderr)
     if not html:
         try:
-            resp = requests.get(url, headers={**_BROWSER_HEADERS, "Accept": "text/html"}, timeout=45)
+            resp = requests.get(
+                url, headers={**_BROWSER_HEADERS, "Accept": "text/html"}, timeout=45
+            )
             resp.raise_for_status()
             html = resp.text
         except requests.RequestException as exc:
-            print(f"[citadel_securities] fetch failed: {exc}", file=sys.stderr)
+            print(f"[{log_name}] fetch failed: {exc}", file=sys.stderr)
             return []
 
     if "Just a moment" in html and "cf-" in html.lower():
         print(
-            "[citadel_securities] blocked by Cloudflare; install/use curl-cffi",
+            f"[{log_name}] blocked by Cloudflare; install/use curl-cffi",
             file=sys.stderr,
         )
         return []
 
+    jobs = _parse_citadel_listing_cards(html, id_prefix=id_prefix, company_name=company_name)
+    print(f"[{log_name}] fetched {len(jobs)} jobs")
+    return jobs
+
+
+def fetch_citadel_securities(
+    company: str | None = None,
+    *,
+    url: str = "https://www.citadelsecurities.com/careers/open-opportunities/",
+) -> list[dict[str, str]]:
+    """Fetch Citadel Securities open roles from the careers HTML listing."""
+    return _fetch_citadel_html(
+        url=url,
+        company_name=company or "Citadel Securities",
+        id_prefix="citadel_securities",
+        log_name="citadel_securities",
+    )
+
+
+def fetch_citadel(
+    company: str | None = None,
+    *,
+    url: str = "https://www.citadel.com/careers/open-opportunities/",
+) -> list[dict[str, str]]:
+    """Fetch Citadel (hedge fund) open roles from the careers HTML listing."""
+    return _fetch_citadel_html(
+        url=url,
+        company_name=company or "Citadel",
+        id_prefix="citadel",
+        log_name="citadel",
+    )
+
+
+def fetch_twosigma(
+    company: str | None = None,
+    *,
+    search_url: str = "https://careers.twosigma.com/careers/OpenRoles/",
+    page_size: int = 10,
+) -> list[dict[str, str]]:
+    """Fetch Two Sigma roles from the Avature OpenRoles HTML listing."""
+    company_name = company or "Two Sigma"
     jobs: list[dict[str, str]] = []
     seen: set[str] = set()
-    for href, title, location in _CITADEL_CARD_RE.findall(html):
-        clean_title = (
-            re.sub(r"\s+", " ", title)
-            .replace("&#8211;", "–")
-            .replace("&amp;", "&")
-            .strip()
-        )
-        if not clean_title:
+    offset = 0
+    max_offset = 5_000
+
+    while offset <= max_offset:
+        try:
+            resp = requests.get(
+                search_url,
+                params={
+                    "listFilterMode": 1,
+                    "jobRecordsPerPage": page_size,
+                    "jobOffset": offset,
+                },
+                headers={**_BROWSER_HEADERS, "Accept": "text/html"},
+                timeout=45,
+            )
+            resp.raise_for_status()
+        except requests.RequestException as exc:
+            print(f"[twosigma] fetch failed at offset={offset}: {exc}", file=sys.stderr)
+            break
+
+        articles = re.findall(r"<article[^>]*>(.*?)</article>", resp.text, re.DOTALL | re.IGNORECASE)
+        new_on_page = 0
+        for article in articles:
+            link_m = re.search(
+                r'href="(https://careers\.twosigma\.com/careers/JobDetail/[^"]+/(\d+))"\s*>\s*([^<]+?)\s*</a>',
+                article,
+            )
+            if not link_m:
+                continue
+            url, job_id, title = link_m.group(1), link_m.group(2), link_m.group(3)
+            clean_title = unescape(re.sub(r"\s+", " ", title)).strip()
+            if not clean_title or clean_title.lower() == "view role":
+                continue
+            if job_id in seen:
+                continue
+            seen.add(job_id)
+            new_on_page += 1
+
+            loc_m = re.search(
+                r'class="paragraph_inner-span"[^>]*>\s*([^<]+)',
+                article,
+                re.IGNORECASE,
+            )
+            location = re.sub(r"\s+", " ", loc_m.group(1)).strip() if loc_m else ""
+            jobs.append(
+                normalize_job(
+                    job_id=f"twosigma:{job_id}",
+                    title=clean_title,
+                    company=company_name,
+                    url=url,
+                    location=location,
+                )
+            )
+
+        if new_on_page == 0:
+            break
+        offset += page_size
+
+    print(f"[twosigma] fetched {len(jobs)} jobs")
+    return jobs
+
+
+def fetch_deshaw(
+    company: str | None = None,
+    *,
+    url: str = "https://www.deshaw.com/careers",
+    include_internships: bool = True,
+) -> list[dict[str, str]]:
+    """Fetch D. E. Shaw roles from the careers page ``__NEXT_DATA__`` payload."""
+    company_name = company or "D. E. Shaw"
+    try:
+        resp = requests.get(url, headers={**_BROWSER_HEADERS, "Accept": "text/html"}, timeout=60)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        print(f"[deshaw] fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    next_m = re.search(
+        r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>',
+        resp.text,
+        re.DOTALL,
+    )
+    if not next_m:
+        print("[deshaw] __NEXT_DATA__ not found", file=sys.stderr)
+        return []
+
+    try:
+        payload = json.loads(next_m.group(1))
+    except json.JSONDecodeError as exc:
+        print(f"[deshaw] __NEXT_DATA__ JSON parse failed: {exc}", file=sys.stderr)
+        return []
+
+    page_props = (payload.get("props") or {}).get("pageProps") or {}
+    raw_lists: list[Any] = []
+    raw_lists.extend(page_props.get("regularJobs") or [])
+    if include_internships:
+        raw_lists.extend(page_props.get("internships") or [])
+
+    jobs: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for item in raw_lists:
+        if not isinstance(item, dict):
             continue
-        slug = href.rstrip("/").rsplit("/", 1)[-1]
-        job_id = slug or clean_title
-        if job_id in seen:
+        job_id = str(item.get("id") or "")
+        if not job_id or job_id in seen:
             continue
         seen.add(job_id)
+
+        data = item.get("data") if isinstance(item.get("data"), dict) else {}
+        title = (item.get("displayName") or item.get("header") or "").strip()
+        if isinstance(title, list):
+            title = " ".join(str(x) for x in title if x).strip()
+        if not title:
+            continue
+
+        offices = item.get("office") or []
+        location_parts: list[str] = []
+        if isinstance(offices, list):
+            for office in offices:
+                if isinstance(office, dict):
+                    name = (office.get("name") or office.get("abbreviation") or "").strip()
+                    if name:
+                        location_parts.append(name)
+                elif office:
+                    location_parts.append(str(office))
+        meta = data.get("jobMetadata") if isinstance(data.get("jobMetadata"), dict) else {}
+        for loc in meta.get("jobLocations") or []:
+            if isinstance(loc, dict):
+                name = (loc.get("name") or loc.get("abbreviation") or "").strip()
+                if name and name not in location_parts:
+                    location_parts.append(name)
+
+        job_slug = (data.get("jobUrl") or "").strip()
+        job_url = (
+            f"https://www.deshaw.com/careers/{job_slug}"
+            if job_slug
+            else f"https://www.deshaw.com/careers"
+        )
+
+        desc = data.get("jobDescription") if isinstance(data.get("jobDescription"), dict) else {}
+        requirements = (
+            desc.get("peopleWeAreLookingForStr")
+            or desc.get("peopleWeAreLookingFor")
+            or desc.get("responsibilities")
+            or desc.get("websiteDescription")
+            or ""
+        )
+        if isinstance(requirements, dict):
+            requirements = requirements.get("text") or requirements.get("html") or ""
+        requirements = str(requirements or "").strip()
+
         jobs.append(
             normalize_job(
-                job_id=f"citadel_securities:{job_id}",
-                title=clean_title,
+                job_id=f"deshaw:{job_id}",
+                title=title,
                 company=company_name,
-                url=href if href.startswith("http") else f"https://www.citadelsecurities.com{href}",
-                location=re.sub(r"\s+", " ", location).strip(),
+                url=job_url,
+                location=", ".join(location_parts),
+                requirements=requirements,
             )
         )
 
-    print(f"[citadel_securities] fetched {len(jobs)} jobs")
+    print(f"[deshaw] fetched {len(jobs)} jobs")
+    return jobs
+
+
+def fetch_hrt(
+    company: str | None = None,
+    *,
+    careers_url: str = "https://www.hudsonrivertrading.com/careers/",
+) -> list[dict[str, str]]:
+    """Fetch Hudson River Trading roles via the WordPress ``get_hrt_jobs_handler`` AJAX API."""
+    company_name = company or "Hudson River Trading"
+    ajax_url = "https://www.hudsonrivertrading.com/wp-admin/admin-ajax.php"
+    # Default board settings from the careers page ``data-filters-settings`` attribute.
+    setting = (
+        '{"meta_data":[{"icon":"","term":"locations"},'
+        '{"icon":"","term":"job-category"},'
+        '{"icon":"","term":"job-type"}],'
+        '"settings":{"hide_job_id":true}}'
+    )
+
+    try:
+        resp = requests.post(
+            ajax_url,
+            data=[
+                ("action", "get_hrt_jobs_handler"),
+                # Empty taxonomy arrays make the endpoint return []; omit them.
+                ("data[search]", ""),
+                ("setting", setting),
+            ],
+            headers={
+                **_BROWSER_HEADERS,
+                "Accept": "*/*",
+                "Referer": careers_url,
+                "X-Requested-With": "XMLHttpRequest",
+            },
+            timeout=45,
+        )
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        print(f"[hrt] fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    try:
+        payload = resp.json()
+    except ValueError as exc:
+        print(f"[hrt] invalid JSON: {exc}", file=sys.stderr)
+        return []
+
+    if not isinstance(payload, list):
+        print(f"[hrt] unexpected payload type {type(payload).__name__}", file=sys.stderr)
+        return []
+
+    jobs: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for item in payload:
+        if not isinstance(item, dict):
+            continue
+        content = item.get("content") or ""
+        title = unescape(str(item.get("title") or "")).strip()
+        if not title:
+            title_m = re.search(
+                r'class="hrt-card-title"[^>]*>\s*([^<]+)', content, re.IGNORECASE
+            )
+            title = unescape(title_m.group(1)).strip() if title_m else ""
+        if not title:
+            continue
+
+        # Prefer WordPress post ID: Greenhouse ``data-jobid`` can collide across roles.
+        job_id = str(item.get("ID") or "").strip()
+        if not job_id:
+            job_id_m = re.search(r'data-jobid="([^"]+)"', content, re.IGNORECASE)
+            job_id = job_id_m.group(1).strip() if job_id_m else ""
+        if not job_id or job_id in seen:
+            continue
+        seen.add(job_id)
+
+        link_m = re.search(
+            r'class="hrt-card-title"\s+href="([^"]+)"', content, re.IGNORECASE
+        )
+        url = unescape(link_m.group(1)).strip() if link_m else ""
+        if not url:
+            url = careers_url
+
+        # Prefer desktop meta location list (first ul before second-list).
+        loc_block = re.search(
+            r'class="hrt-card-meta-desktop"[^>]*>\s*<ul class="hrt-card-info-list">(.*?)</ul>',
+            content,
+            re.DOTALL | re.IGNORECASE,
+        )
+        location_parts: list[str] = []
+        if loc_block:
+            for span in re.findall(r"<span>([^<]+)</span>", loc_block.group(1)):
+                label = unescape(re.sub(r"\s+", " ", span)).strip()
+                if label and label not in location_parts:
+                    location_parts.append(label)
+
+        desc_m = re.search(
+            r'class="hrt-card-description"[^>]*>(.*?)</p>',
+            content,
+            re.DOTALL | re.IGNORECASE,
+        )
+        requirements = ""
+        if desc_m:
+            requirements = unescape(re.sub(r"<[^>]+>", " ", desc_m.group(1)))
+            requirements = re.sub(r"\s+", " ", requirements).strip()
+        if not requirements:
+            requirements = unescape(str(item.get("description") or "")).strip()
+
+        jobs.append(
+            normalize_job(
+                job_id=f"hrt:{job_id}",
+                title=title,
+                company=company_name,
+                url=url,
+                location=", ".join(location_parts),
+                requirements=requirements,
+            )
+        )
+
+    print(f"[hrt] fetched {len(jobs)} jobs")
+    return jobs
+
+
+def fetch_workable(
+    account: str,
+    company: str | None = None,
+) -> list[dict[str, str]]:
+    """Fetch jobs from a Workable public careers account (POST /api/v3/.../jobs)."""
+    company_name = company or account
+    api_url = f"https://apply.workable.com/api/v3/accounts/{account}/jobs"
+    try:
+        resp = requests.post(
+            api_url,
+            headers={
+                **_BROWSER_HEADERS,
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            json={
+                "query": "",
+                "location": [],
+                "department": [],
+                "worktype": [],
+                "workplace": [],
+            },
+            timeout=45,
+        )
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        print(f"[workable:{account}] fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    payload = resp.json()
+    results = payload.get("results") or []
+    jobs: list[dict[str, str]] = []
+
+    for item in results:
+        if not isinstance(item, dict):
+            continue
+        if item.get("state") and str(item.get("state")).lower() not in {"published", "live", ""}:
+            # Still include when state is missing; skip clearly non-public.
+            if str(item.get("state")).lower() in {"draft", "archived", "closed"}:
+                continue
+        shortcode = str(item.get("shortcode") or item.get("id") or "")
+        if not shortcode:
+            continue
+
+        location = ""
+        loc = item.get("location")
+        if isinstance(loc, dict):
+            parts = [loc.get("city") or "", loc.get("region") or "", loc.get("country") or ""]
+            location = ", ".join(p for p in parts if p)
+        locs = item.get("locations") or []
+        if isinstance(locs, list) and locs:
+            joined: list[str] = []
+            for loc in locs:
+                if not isinstance(loc, dict):
+                    continue
+                parts = [loc.get("city") or "", loc.get("region") or "", loc.get("country") or ""]
+                label = ", ".join(p for p in parts if p)
+                if label:
+                    joined.append(label)
+            if joined:
+                location = "; ".join(joined)
+
+        if item.get("remote") or (item.get("workplace") or "").lower() == "remote":
+            if location and "remote" not in location.lower():
+                location = f"{location} (Remote)"
+            elif not location:
+                location = "Remote"
+
+        jobs.append(
+            normalize_job(
+                job_id=f"workable:{account}:{shortcode}",
+                title=(item.get("title") or "").strip() or "Untitled",
+                company=company_name,
+                url=f"https://apply.workable.com/{account}/j/{shortcode}/",
+                location=location,
+            )
+        )
+
+    print(f"[workable:{account}] fetched {len(jobs)} jobs")
     return jobs
 
 
@@ -1772,7 +2230,11 @@ def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
                 token = site.get("board_token")
                 if not token:
                     continue
-                fetched = fetch_greenhouse(token, company=company or token)
+                fetched = fetch_greenhouse(
+                    token,
+                    company=company or token,
+                    metadata_includes=site.get("metadata_includes") or None,
+                )
             elif site_type == "ashby":
                 board = site.get("board_name") or site.get("board_token")
                 if not board:
@@ -1783,6 +2245,11 @@ def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
                 if not lever_site:
                     continue
                 fetched = fetch_lever(lever_site, company=company or lever_site)
+            elif site_type == "workable":
+                account = site.get("account") or site.get("board_token") or site.get("site")
+                if not account:
+                    continue
+                fetched = fetch_workable(account, company=company or account)
             elif site_type == "eightfold":
                 domain = site.get("domain")
                 host = site.get("host")
@@ -1854,6 +2321,30 @@ def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
                     company=company or "Citadel Securities",
                     url=site.get("url")
                     or "https://www.citadelsecurities.com/careers/open-opportunities/",
+                )
+            elif site_type == "citadel":
+                fetched = fetch_citadel(
+                    company=company or "Citadel",
+                    url=site.get("url")
+                    or "https://www.citadel.com/careers/open-opportunities/",
+                )
+            elif site_type == "twosigma":
+                fetched = fetch_twosigma(
+                    company=company or "Two Sigma",
+                    search_url=site.get("search_url")
+                    or site.get("url")
+                    or "https://careers.twosigma.com/careers/OpenRoles/",
+                )
+            elif site_type == "deshaw":
+                fetched = fetch_deshaw(
+                    company=company or "D. E. Shaw",
+                    url=site.get("url") or "https://www.deshaw.com/careers",
+                )
+            elif site_type == "hrt":
+                fetched = fetch_hrt(
+                    company=company or "Hudson River Trading",
+                    careers_url=site.get("url")
+                    or "https://www.hudsonrivertrading.com/careers/",
                 )
             elif site_type in {"placeholder", "documentation"}:
                 # Documentation / non-API targets are skipped at fetch time.
