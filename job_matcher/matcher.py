@@ -13,6 +13,8 @@ from google import genai
 from google.genai import errors as genai_errors
 from pydantic import BaseModel, Field
 
+from job_matcher.sources._http import fetch_page_text
+
 # Free-tier Gemini Flash is typically ~5 RPM per model; pace requests accordingly.
 # Two Flash-Lite models share the work so each model's quota can be used.
 DEFAULT_MODELS = ("gemini-3.5-flash-lite", "gemini-3.1-flash-lite")
@@ -22,6 +24,34 @@ DEFAULT_MAX_JOBS_PER_RUN = 40
 
 _SYSTEM_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "system_match.txt"
 SYSTEM_PROMPT = _SYSTEM_PROMPT_PATH.read_text(encoding="utf-8").strip()
+
+
+def ensure_requirements(job: dict[str, str]) -> str:
+    """Return non-empty requirements text for the LLM.
+
+    If the scraper left requirements blank, fetch the job URL and use the whole
+    page text instead. Mutates job['requirements'] when a page fallback succeeds.
+    """
+    existing = (job.get("requirements") or "").strip()
+    if existing:
+        return existing
+
+    url = (job.get("url") or "").strip()
+    page_text = fetch_page_text(url) if url else ""
+    if page_text:
+        print(
+            f"[match] empty requirements for {job.get('id')}; "
+            f"using full page text ({len(page_text)} chars)",
+            file=sys.stderr,
+        )
+        job["requirements"] = page_text
+        return page_text
+
+    print(
+        f"[match] empty requirements and page fetch failed for {job.get('id')} ({url})",
+        file=sys.stderr,
+    )
+    return ""
 
 
 class MatchResult(BaseModel):
@@ -116,10 +146,11 @@ def match_job(
     if not models:
         raise ValueError("models must not be empty")
 
+    requirements = ensure_requirements(job)
     user_prompt = (
         f"Company: {job.get('company', '')}\n"
         f"URL: {job.get('url', '')}\n\n"
-        f"Requirements section:\n{job.get('requirements') or '(empty)'}\n\n"
+        f"Requirements section:\n{requirements or '(empty — page fetch failed)'}\n\n"
         f"Resume lines:\n" + "\n".join(f"- {line}" for line in resume_lines)
     )
 
