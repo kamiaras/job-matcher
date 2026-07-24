@@ -894,5 +894,285 @@
     "url": "https://www.metacareers.com/jobs/1927852644809839",
     "matched": false,
     "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:1419173033108804": {
+    "title": "Research Engineer, Text Data Research - MSL FAIR",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1419173033108804",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "meta:882415754757202": {
+    "title": "AI Research Engineer",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/882415754757202",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "meta:1723615698957769": {
+    "title": "Research Scientist, Advanced Control",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1723615698957769",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "meta:1650570196176691": {
+    "title": "Research Engineer - Automated Lab Development",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1650570196176691",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "meta:1485957726592535": {
+    "title": "AI Research Scientist, Reinforcement Learning",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1485957726592535",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "meta:1240605408142190": {
+    "title": "AI Research Scientist - Meta Superintelligence Labs",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1240605408142190",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "ashby:mistral.ai:556595b2-d78b-486e-a3b2-14ad533f8caa": {
+    "title": "Applied Scientist / Research Engineer, AI4Engineering",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/556595b2-d78b-486e-a3b2-14ad533f8caa",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "ashby:mistral.ai:9fc579c8-784c-4b91-bcd0-392f35d13100": {
+    "title": "AI Scientist",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/9fc579c8-784c-4b91-bcd0-392f35d13100",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "ashby:mistral.ai:b087ffe4-3f55-4072-9ff8-9f5f17b4121d": {
+    "title": "Research Engineer, Machine Learning",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/b087ffe4-3f55-4072-9ff8-9f5f17b4121d",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "ashby:mistral.ai:4c19b931-3a95-48b3-ac96-9e4c52f5a603": {
+    "title": "Research Engineer, Data Infrastructure",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/4c19b931-3a95-48b3-ac96-9e4c52f5a603",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:stripe:8044460": {
+    "title": "AI Engineer",
+    "company": "Stripe",
+    "url": "https://stripe.com/jobs/search?gh_jid=8044460",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:stripe:8080614": {
+    "title": "Data Scientist, Core Infrastructure",
+    "company": "Stripe",
+    "url": "https://stripe.com/jobs/search?gh_jid=8080614",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:airbnb:8031901": {
+    "title": "Data Scientist - Algorithms, Community Support",
+    "company": "Airbnb",
+    "url": "https://careers.airbnb.com/positions/8031901?gh_jid=8031901",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:imc:4907416101": {
+    "title": "Graduate Machine Learning Researcher - Chicago",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4907416101",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:imc:4907368101": {
+    "title": "Graduate Quantitative Researcher (BS/MS)",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4907368101",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:imc:4912325101": {
+    "title": "Graduate Quantitative Researcher (PhD)",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4912325101",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:imc:4699252101": {
+    "title": "Machine Learning Researcher",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4699252101",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:imc:4660792101": {
+    "title": "Quantitative Researcher - Data Curation",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4660792101",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:imc:4382558101": {
+    "title": "Quantitative Researcher – Equities",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4382558101",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:imc:4740859101": {
+    "title": "Quantitative Researcher – Futures",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4740859101",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:imc:4286816101": {
+    "title": "Quantitative Researcher - Options",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4286816101",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:drweng:6586001": {
+    "title": "AI Engineer",
+    "company": "DRW",
+    "url": "https://job-boards.greenhouse.io/drweng/jobs/6586001",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:drweng:6586065": {
+    "title": "AI Engineer",
+    "company": "DRW",
+    "url": "https://job-boards.greenhouse.io/drweng/jobs/6586065",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:drweng:8030406": {
+    "title": "Quantitative Researcher",
+    "company": "DRW",
+    "url": "https://job-boards.greenhouse.io/drweng/jobs/8030406",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:drweng:7650182": {
+    "title": "Quantitative Researcher",
+    "company": "DRW",
+    "url": "https://job-boards.greenhouse.io/drweng/jobs/7650182",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:drweng:6973885": {
+    "title": "Research Engineer",
+    "company": "DRW",
+    "url": "https://job-boards.greenhouse.io/drweng/jobs/6973885",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:drweng:7097016": {
+    "title": "Research Engineer (FICCO)",
+    "company": "DRW",
+    "url": "https://job-boards.greenhouse.io/drweng/jobs/7097016",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:drweng:7377915": {
+    "title": "Research Engineer (FICCO)",
+    "company": "DRW",
+    "url": "https://job-boards.greenhouse.io/drweng/jobs/7377915",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:akunacapital:8036541": {
+    "title": "Junior Quantitative Researcher",
+    "company": "Akuna",
+    "url": "https://www.akunacapital.com/careers/job/8036541/?gh_jid=8036541",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:akunacapital:7863348": {
+    "title": "Junior Quantitative Researcher - Prediction Markets",
+    "company": "Akuna",
+    "url": "https://www.akunacapital.com/careers/job/7863348/?gh_jid=7863348",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:akunacapital:7496416": {
+    "title": "Quantitative Researcher",
+    "company": "Akuna",
+    "url": "https://www.akunacapital.com/careers/job/7496416/?gh_jid=7496416",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:akunacapital:7846695": {
+    "title": "Quantitative Researcher - Prediction Markets",
+    "company": "Akuna",
+    "url": "https://www.akunacapital.com/careers/job/7846695/?gh_jid=7846695",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:lyft:8403370002": {
+    "title": "Applied Scientist- Pricing, Dynamic Pricing & Offer Selection",
+    "company": "Lyft",
+    "url": "https://app.careerpuck.com/job-board/lyft/job/8403370002?gh_jid=8403370002",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:lyft:8402813002": {
+    "title": "Applied Scientist- Pricing, Dynamic Pricing & Offer Selection",
+    "company": "Lyft",
+    "url": "https://app.careerpuck.com/job-board/lyft/job/8402813002?gh_jid=8402813002",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:lyft:8378473002": {
+    "title": "Data Scientist, Decisions - Central Market Management",
+    "company": "Lyft",
+    "url": "https://app.careerpuck.com/job-board/lyft/job/8378473002?gh_jid=8378473002",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:lyft:8376875002": {
+    "title": "Data Scientist, Decisions - Central Market Management",
+    "company": "Lyft",
+    "url": "https://app.careerpuck.com/job-board/lyft/job/8376875002?gh_jid=8376875002",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:lyft:8615368002": {
+    "title": "Data Scientist, Optimization - Pricing",
+    "company": "Lyft",
+    "url": "https://app.careerpuck.com/job-board/lyft/job/8615368002?gh_jid=8615368002",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "greenhouse:doordashusa:7580407": {
+    "title": "Machine Learning Engineer, Marketplace Optimization",
+    "company": "DoorDash",
+    "url": "https://job-boards.greenhouse.io/doordashusa/jobs/7580407",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "lever:spotify:e68ad741-4c4e-4b06-ae11-9cf1e36dd40f": {
+    "title": "Machine Learning Engineer",
+    "company": "Spotify",
+    "url": "https://jobs.lever.co/spotify/e68ad741-4c4e-4b06-ae11-9cf1e36dd40f",
+    "matched": true,
+    "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "bytedance:7610949520813525253": {
+    "title": "Research Engineer – Reinforcement Learning (RL) Systems & Infrastructure (Seed Infra)",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7610949520813525253",
+    "matched": false,
+    "seen_at": "2026-07-24T03:53:41Z"
   }
 }
