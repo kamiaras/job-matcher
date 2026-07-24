@@ -1174,5 +1174,47 @@
     "url": "https://jobs.bytedance.com/en/position/7610949520813525253",
     "matched": false,
     "seen_at": "2026-07-24T03:53:41Z"
+  },
+  "uber:158789": {
+    "title": "Machine Learning Engineer II - AV Labs",
+    "company": "Uber",
+    "url": "https://jobs.uber.com/en/jobs/158789",
+    "matched": false,
+    "seen_at": "2026-07-24T10:33:19Z"
+  },
+  "bytedance:7598744114403870981": {
+    "title": "Research Engineer/Scientist (all levels), Efficient Models",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7598744114403870981",
+    "matched": false,
+    "seen_at": "2026-07-24T10:33:19Z"
+  },
+  "bytedance:7639486887022889269": {
+    "title": "Research Scientist, ByteBrain Infrastructure Operation",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7639486887022889269",
+    "matched": true,
+    "seen_at": "2026-07-24T10:33:19Z"
+  },
+  "bytedance:7233349076828490043": {
+    "title": "Research Scientist in Large Language Model (LLM)-Seed",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7233349076828490043",
+    "matched": true,
+    "seen_at": "2026-07-24T10:33:19Z"
+  },
+  "bytedance:7372456509756508426": {
+    "title": "Research Scientist, Applied GAI-Vision",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7372456509756508426",
+    "matched": false,
+    "seen_at": "2026-07-24T10:33:19Z"
+  },
+  "bytedance:7571650125270370613": {
+    "title": "Machine Learning Engineer, AI Coding Tools",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7571650125270370613",
+    "matched": false,
+    "seen_at": "2026-07-24T10:33:19Z"
   }
 }
