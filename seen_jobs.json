@@ -334,5 +334,285 @@
     "url": "https://job-boards.greenhouse.io/anthropic/jobs/5109273008",
     "matched": false,
     "seen_at": "2026-07-23T10:26:09Z"
+  },
+  "greenhouse:janestreet:6485460002": {
+    "title": "Machine Learning Engineer",
+    "company": "Jane Street",
+    "url": "https://job-boards.greenhouse.io/janestreet/jobs/6485460002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:janestreet:8611307002": {
+    "title": "Machine Learning Engineer",
+    "company": "Jane Street",
+    "url": "https://job-boards.greenhouse.io/janestreet/jobs/8611307002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:janestreet:8576928002": {
+    "title": "Machine Learning Researcher",
+    "company": "Jane Street",
+    "url": "https://job-boards.greenhouse.io/janestreet/jobs/8576928002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:janestreet:8384490002": {
+    "title": "Machine Learning Researcher",
+    "company": "Jane Street",
+    "url": "https://job-boards.greenhouse.io/janestreet/jobs/8384490002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:janestreet:4276720002": {
+    "title": "Machine Learning Researcher",
+    "company": "Jane Street",
+    "url": "https://job-boards.greenhouse.io/janestreet/jobs/4276720002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:janestreet:8498547002": {
+    "title": "Quantitative Researcher",
+    "company": "Jane Street",
+    "url": "https://job-boards.greenhouse.io/janestreet/jobs/8498547002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:janestreet:8573726002": {
+    "title": "Quantitative Researcher",
+    "company": "Jane Street",
+    "url": "https://job-boards.greenhouse.io/janestreet/jobs/8573726002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:janestreet:6302325002": {
+    "title": "Quantitative Researcher",
+    "company": "Jane Street",
+    "url": "https://job-boards.greenhouse.io/janestreet/jobs/6302325002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:jumptrading:4982814": {
+    "title": "AI Research Scientist | Research & Development",
+    "company": "Jump Trading",
+    "url": "https://www.jumptrading.com/hr/job?gh_jid=4982814",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:jumptrading:6032511": {
+    "title": "Research Scientist/Research Engineer | Deep Learning",
+    "company": "Jump Trading",
+    "url": "https://www.jumptrading.com/hr/job?gh_jid=6032511",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7045938002": {
+    "title": "Cubist Data Scientist",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7045938002?gh_jid=7045938002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7045987002": {
+    "title": "Cubist Quantitative Researcher",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7045987002?gh_jid=7045987002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7318005002": {
+    "title": "Cubist Quantitative Researcher",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7318005002?gh_jid=7318005002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7695570002": {
+    "title": "Data Scientist, Proprietary Research",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7695570002?gh_jid=7695570002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7297561002": {
+    "title": "Equity Quantitative Researcher",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7297561002?gh_jid=7297561002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:8389431002": {
+    "title": "Fund Flow Quantitative Researcher",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/8389431002?gh_jid=8389431002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:8170176002": {
+    "title": "Machine Learning Engineer",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/8170176002?gh_jid=8170176002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7302643002": {
+    "title": "Macro Quantitative Researcher",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7302643002?gh_jid=7302643002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:8384470002": {
+    "title": "Microstructure Quantitative Researcher",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/8384470002?gh_jid=8384470002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7906984002": {
+    "title": "Quantitative Researcher",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7906984002?gh_jid=7906984002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:8023550002": {
+    "title": "Quantitative Researcher - Machine Learning",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/8023550002?gh_jid=8023550002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7297513002": {
+    "title": "Quantitative Researcher - Machine Learning",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7297513002?gh_jid=7297513002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7297612002": {
+    "title": "Quantitative Researcher - Macro",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7297612002?gh_jid=7297612002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7297625002": {
+    "title": "Quantitative Researcher - Systematic Credit",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7297625002?gh_jid=7297625002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:point72:7297643002": {
+    "title": "Quantitative Researcher, Trading Research",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/7297643002?gh_jid=7297643002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:virtu:8457186002": {
+    "title": "Machine Learning Engineer",
+    "company": "Virtu Financial",
+    "url": "https://job-boards.greenhouse.io/virtu/jobs/8457186002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:virtu:8477580002": {
+    "title": "Machine Learning Researcher",
+    "company": "Virtu Financial",
+    "url": "https://job-boards.greenhouse.io/virtu/jobs/8477580002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:virtu:8219047002": {
+    "title": "Quantitative Researcher: Fixed Income",
+    "company": "Virtu Financial",
+    "url": "https://job-boards.greenhouse.io/virtu/jobs/8219047002",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:virtu:4205353002": {
+    "title": "Quantitative Strategist (PhD)",
+    "company": "Virtu Financial",
+    "url": "https://job-boards.greenhouse.io/virtu/jobs/4205353002",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:robinhood:7960680": {
+    "title": "Machine Learning Engineer",
+    "company": "Robinhood",
+    "url": "https://boards.greenhouse.io/robinhood/jobs/7960680?t=gh_src=&gh_jid=7960680",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:scaleai:4534631005": {
+    "title": "ML Research Engineer, ML Systems",
+    "company": "Scale AI",
+    "url": "https://job-boards.greenhouse.io/scaleai/jobs/4534631005",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:scaleai:4675694005": {
+    "title": "Research Scientist, AI Controls and Monitoring",
+    "company": "Scale AI",
+    "url": "https://job-boards.greenhouse.io/scaleai/jobs/4675694005",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:togetherai:4187681007": {
+    "title": "AI Researcher, Core ML (Turbo)",
+    "company": "Together AI",
+    "url": "https://job-boards.greenhouse.io/togetherai/jobs/4187681007",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:togetherai:4384627007": {
+    "title": "Research Engineer, Core ML",
+    "company": "Together AI",
+    "url": "https://job-boards.greenhouse.io/togetherai/jobs/4384627007",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:togetherai:4987660007": {
+    "title": "Research Engineer, Frontier Speculative Decoding",
+    "company": "Together AI",
+    "url": "https://job-boards.greenhouse.io/togetherai/jobs/4987660007",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:waymo:7455592": {
+    "title": "Data Scientist",
+    "company": "Waymo",
+    "url": "https://careers.withwaymo.com/jobs?gh_jid=7455592",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:waymo:7905643": {
+    "title": "Machine Learning Engineer, Marketplace Pricing",
+    "company": "Waymo",
+    "url": "https://careers.withwaymo.com/jobs?gh_jid=7905643",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:waymo:7426598": {
+    "title": "Machine Learning Engineer, ML Flywheel",
+    "company": "Waymo",
+    "url": "https://careers.withwaymo.com/jobs?gh_jid=7426598",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:waymo:6506689": {
+    "title": "Machine Learning Engineer, Prediction & Planning",
+    "company": "Waymo",
+    "url": "https://careers.withwaymo.com/jobs?gh_jid=6506689",
+    "matched": true,
+    "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "greenhouse:waymo:8031918": {
+    "title": "Systems Modeling & Optimization Engineer",
+    "company": "Waymo",
+    "url": "https://careers.withwaymo.com/jobs?gh_jid=8031918",
+    "matched": false,
+    "seen_at": "2026-07-24T01:18:46Z"
   }
 }
