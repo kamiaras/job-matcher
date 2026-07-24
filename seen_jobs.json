@@ -614,5 +614,285 @@
     "url": "https://careers.withwaymo.com/jobs?gh_jid=8031918",
     "matched": false,
     "seen_at": "2026-07-24T01:18:46Z"
+  },
+  "ashby:openai:240d459b-696d-43eb-8497-fab3e56ecd9b": {
+    "title": "Research Engineer",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/240d459b-696d-43eb-8497-fab3e56ecd9b",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:openai:5f0c6579-0bfb-4a06-8a43-1dd371499e10": {
+    "title": "Research Scientist",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/5f0c6579-0bfb-4a06-8a43-1dd371499e10",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:openai:7e198d81-34e0-48b6-b64e-a501a75f9d53": {
+    "title": "Research Engineer/Research Scientist, RL/Reasoning",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/7e198d81-34e0-48b6-b64e-a501a75f9d53",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:openai:e71cf565-4b21-4b0d-bf45-b22e58ca95eb": {
+    "title": "Data Scientist, Infrastructure",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/e71cf565-4b21-4b0d-bf45-b22e58ca95eb",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:openai:898a87fb-4cb8-450e-9840-ee5dc710a57d": {
+    "title": "Data Scientist, Financial Engineering",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/898a87fb-4cb8-450e-9840-ee5dc710a57d",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:openai:e90a44a7-fc2e-49bf-aec4-d43b9e3d8e92": {
+    "title": "Data Scientist, Core Experimentation",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/e90a44a7-fc2e-49bf-aec4-d43b9e3d8e92",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:cohere:7ec9eaf4-8cfc-4977-9041-86f73e7ab10b": {
+    "title": "Research Scientist, Cohere Labs",
+    "company": "Cohere",
+    "url": "https://jobs.ashbyhq.com/cohere/7ec9eaf4-8cfc-4977-9041-86f73e7ab10b",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:cohere:e4603bb7-5bbe-4f73-9556-02c93f78b2af": {
+    "title": "Data Scientist, North Insights",
+    "company": "Cohere",
+    "url": "https://jobs.ashbyhq.com/cohere/e4603bb7-5bbe-4f73-9556-02c93f78b2af",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:cursor:cd4bad0a-e2f6-4a8d-9b57-ce1780efedae": {
+    "title": "Research Scientist",
+    "company": "Cursor",
+    "url": "https://jobs.ashbyhq.com/cursor/cd4bad0a-e2f6-4a8d-9b57-ce1780efedae",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:fireworksai:34147044-a771-446e-9bdd-28ae3a6d83d2": {
+    "title": "MTS, Research Engineer",
+    "company": "Fireworks AI",
+    "url": "https://jobs.ashbyhq.com/fireworksai/34147044-a771-446e-9bdd-28ae3a6d83d2",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:fireworksai:fc3845e6-e8ba-4756-a03e-654f14ce605b": {
+    "title": "Applied Machine Learning Engineer",
+    "company": "Fireworks AI",
+    "url": "https://jobs.ashbyhq.com/fireworksai/fc3845e6-e8ba-4756-a03e-654f14ce605b",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:thinking-machines:e4dbe2d6-6d7e-47cf-a654-57de5fafe8a1": {
+    "title": "Research Engineer, Infrastructure, RL Systems",
+    "company": "Thinking Machines",
+    "url": "https://jobs.ashbyhq.com/thinking-machines/e4dbe2d6-6d7e-47cf-a654-57de5fafe8a1",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:thinking-machines:684490c1-bfbd-4c6d-9d13-ab4f7e324d85": {
+    "title": "Research Engineer, Infrastructure, Kernels",
+    "company": "Thinking Machines",
+    "url": "https://jobs.ashbyhq.com/thinking-machines/684490c1-bfbd-4c6d-9d13-ab4f7e324d85",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:thinking-machines:6654de68-dac5-4134-a446-56150a4b5803": {
+    "title": "Research Engineer, Infrastructure, Numerics",
+    "company": "Thinking Machines",
+    "url": "https://jobs.ashbyhq.com/thinking-machines/6654de68-dac5-4134-a446-56150a4b5803",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:writer:8889d06e-efa9-4096-b806-f1626fe060ae": {
+    "title": "AI engineer",
+    "company": "Writer",
+    "url": "https://jobs.ashbyhq.com/writer/8889d06e-efa9-4096-b806-f1626fe060ae",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "ashby:writer:100b3aec-e337-4df7-998a-479c6d8ea452": {
+    "title": "AI research scientist",
+    "company": "Writer",
+    "url": "https://jobs.ashbyhq.com/writer/100b3aec-e337-4df7-998a-479c6d8ea452",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "eightfold:netflix.com:790316825563": {
+    "title": "Machine Learning Scientist 4/5 -  Generative Models",
+    "company": "Netflix",
+    "url": "https://explore.jobs.netflix.net/careers/job/790316825563",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "eightfold:mlp.com:755956726965": {
+    "title": "Data Scientist - Investment Team",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755956726965",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "eightfold:mlp.com:755956718561": {
+    "title": "Research Scientist",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755956718561",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "eightfold:mlp.com:755956531966": {
+    "title": "Quantitative Researcher -Data Infrastructure & Signal Development",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755956531966",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "eightfold:mlp.com:755956532395": {
+    "title": "ML Research Scientist -Deep Learning & Transformer Architectures",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755956532395",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "eightfold:mlp.com:755956328628": {
+    "title": "Quantitative Researcher, Quantitative Strategies",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755956328628",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "eightfold:mlp.com:755943671775": {
+    "title": "Quantitative Researcher, Systematic Macro",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755943671775",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "google:125129858576458438": {
+    "title": "AI Research Scientist, Applied AI, Google Cloud",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/125129858576458438",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "google:142383695687230150": {
+    "title": "Research Scientist, Paradigms of Intelligence",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/142383695687230150",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "google:77708961452565190": {
+    "title": "Data Scientist, Research - multiple openings",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/77708961452565190",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "google:84950975319548614": {
+    "title": "Research Scientist, GenAI, Graph Mining",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/84950975319548614",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "google:113241282800689862": {
+    "title": "Research Scientist, Google Research",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/113241282800689862",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "google:106212472184021702": {
+    "title": "AI Engineer, Advanced Solutions Lab, Google Cloud",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/106212472184021702",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:1531341668630704": {
+    "title": "Research Scientist – Central Applied Science",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1531341668630704",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:981521268137572": {
+    "title": "Research Scientist, AI & Systems Co-Design (PhD)",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/981521268137572",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:2288859265196139": {
+    "title": "Research Scientist, AI Networking (PhD)",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2288859265196139",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:2709819839377555": {
+    "title": "AI Research Scientist - MSL FAIR Foundations",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2709819839377555",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:1250945876568739": {
+    "title": "AI Research Scientist - FAIR Social Intelligence",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1250945876568739",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:2097911327429773": {
+    "title": "Research Scientist, ML H-W/S-W Codesign",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2097911327429773",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:874898091996160": {
+    "title": "Research Engineer - MSL FAIR Foundations",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/874898091996160",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:27256481520713890": {
+    "title": "Research Scientist, World Modelling",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/27256481520713890",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:1187350126138459": {
+    "title": "AI Research Scientist, Media Data Research - MSL FAIR",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1187350126138459",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:935985748859498": {
+    "title": "Research Engineer - MSL FAIR Foundations",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/935985748859498",
+    "matched": true,
+    "seen_at": "2026-07-24T02:10:52Z"
+  },
+  "meta:1927852644809839": {
+    "title": "AI Research Scientist, Text Data Research - MSL FAIR",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1927852644809839",
+    "matched": false,
+    "seen_at": "2026-07-24T02:10:52Z"
   }
 }
