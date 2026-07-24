@@ -11,8 +11,10 @@ Degree tracks (Master's vs Ph.D.):
 - If Requirements say Ph.D. preferred/required with fewer or zero years, use that bar.
 - If Requirements only state a Master's + years path and never mention Ph.D. as an alternative, apply those requirements as written.
 
+The requirements block may be labeled "Requirements", "What You Bring", "Qualifications", or similar. Treat all of those as the Requirements section.
+
 Rules:
-1. Compare ONLY the job's Requirements section against the candidate's resume lines (plus the experience baseline above).
-2. IGNORE salary, benefits, culture, perks, company description.
+1. Compare ONLY the job's Requirements section (including aliases like "What You Bring") against the candidate's resume lines (plus the experience baseline above).
+2. IGNORE salary, benefits, culture, perks, company description, and "What You'll Do" / responsibilities.
 3. List any unmet hard requirements in missing_requirements. If is_match is true, missing_requirements should be empty.
 4. Keep reason short (one or two sentences).
