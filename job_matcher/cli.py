@@ -125,7 +125,6 @@ def run_llm_match(config: dict[str, Any], seen: dict[str, Any]) -> int:
         print(f"Fetched {len(all_jobs)} jobs; {len(unseen)} unseen")
 
     client = genai.Client(api_key=api_key)
-    location_requirement = config.get("location_requirement") or "US"
     matches: list[dict[str, Any]] = []
     now = utc_now_iso()
     stopped_for_rate_limit = False
@@ -140,7 +139,6 @@ def run_llm_match(config: dict[str, Any], seen: dict[str, Any]) -> int:
                 resume_lines,
                 client,
                 models=models,
-                location_requirement=location_requirement,
                 max_retries=max_retries,
                 model_start_index=index % len(models),
             )

@@ -5,6 +5,7 @@ USC ECE Ph.D. candidate (expected Dec 2026), GPA 3.90/4.00.
 Ph.D. in Electrical and Computer Engineering with minor in Industrial and Systems Engineering (ISE).
 B.S. in Electrical Engineering from Sharif University of Technology.
 National Physics Olympiad Bronze Medalist (Iranian National Physics Olympiad, 2013; top 50 nationwide).
+0 years of full-time industry experience; research and internship experience only (qualifies for 0-N / new-grad experience bands).
 Located in Los Angeles, CA; open to US-based and remote-US roles.
 Work authorization: F-1 OPT eligible.
 Hands-on (but not production grade) experience in machine learning, deep learning, LLM prompt engineering, and applied AI system design.
