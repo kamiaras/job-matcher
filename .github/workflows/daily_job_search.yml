@@ -1,15 +1,15 @@
-# Deterministic filter branch (no LLM)
-
-name: Deterministic Job Filter
+name: Daily Job Search
 
 on:
+  schedule:
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  filter-jobs:
+  match-jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,11 +23,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run deterministic filter
+      - name: Run job matcher
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scraper.py
 
-      - name: Upload candidates.json
-        uses: actions/upload-artifact@v4
+      - name: Commit seen_jobs memory
+        # Keep partial progress if the matcher step fails mid-run (jobs already
+        # sent to the LLM are in seen_jobs.json and must not be re-scored).
+        if: always()
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          name: candidates
-          path: candidates.json
+          commit_message: "chore: update seen_jobs memory"
+          file_pattern: seen_jobs.json
+          branch: main
