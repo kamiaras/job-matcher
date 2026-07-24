@@ -20,10 +20,10 @@ Each run (cron at 08:00 UTC, or manual workflow dispatch):
    multi-location jobs that still include a US option (and ambiguous / empty /
    bare-Remote listings).
 5. **Skip already-seen jobs** — IDs stored in `seen_jobs.json` are ignored.
-6. **Strict LLM match** — Gemini compares the job’s requirements (and US location
-   eligibility) to lines in `resume.txt`. Soft preferences, culture blurbs, and
-   “nice to haves” are ignored; a job matches only if every hard requirement is
-   supported by the resume.
+6. **Strict LLM match** — Gemini compares the job’s requirements to lines in
+   `resume.txt` (title/location already filtered). Soft preferences, culture
+   blurbs, and “nice to haves” are ignored; a job matches only if every hard
+   requirement is supported by the resume.
 7. **Report & remember** — matches are written to the Actions run Summary; all
    evaluated jobs are appended to `seen_jobs.json` and committed back to `main`.
 
@@ -37,6 +37,7 @@ end-to-end.
 | `scraper.py` | Fetch → filter → match → persist |
 | `config.json` | Target titles, exclusions, non-US locations, ATS boards |
 | `resume.txt` | One experience claim per line (`#` comments / blanks ignored) |
+| `job_matcher/prompts/system_match.txt` | Gemini system prompt for requirements matching |
 | `seen_jobs.json` | Dedup memory of processed jobs |
 | `.github/workflows/daily_job_search.yml` | Daily GitHub Actions runner |
 

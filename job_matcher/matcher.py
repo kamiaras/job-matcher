@@ -6,6 +6,7 @@ import os
 import re
 import sys
 import time
+from pathlib import Path
 from typing import Any
 
 from google import genai
@@ -19,17 +20,8 @@ DEFAULT_REQUEST_INTERVAL_SEC = 7.0
 DEFAULT_MAX_RETRIES = 8
 DEFAULT_MAX_JOBS_PER_RUN = 40
 
-SYSTEM_PROMPT = """You are a strict job-requirements matcher. Nothing more, nothing less.
-
-Rules:
-1. Compare ONLY the job's Requirements section against the candidate's resume lines.
-2. Also verify the job location is in the US (including remote-US / nationwide US). Reject non-US locations.
-3. Explicitly IGNORE salary, benefits, culture, perks, company description, and any "nice to have" framing that is outside Requirements.
-4. Do NOT soft-match preferences or infer skills that are not clearly supported by a resume line.
-5. A job is a match only if every hard requirement in the Requirements section is supported by the resume AND the location is US-eligible.
-6. List any unmet hard requirements in missing_requirements. If is_match is true, missing_requirements should be empty.
-7. Keep reason short (one or two sentences).
-"""
+_SYSTEM_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "system_match.txt"
+SYSTEM_PROMPT = _SYSTEM_PROMPT_PATH.read_text(encoding="utf-8").strip()
 
 
 class MatchResult(BaseModel):
@@ -118,7 +110,6 @@ def match_job(
     client: genai.Client,
     *,
     models: list[str],
-    location_requirement: str = "US",
     max_retries: int = DEFAULT_MAX_RETRIES,
     model_start_index: int = 0,
 ) -> MatchResult:
@@ -126,10 +117,7 @@ def match_job(
         raise ValueError("models must not be empty")
 
     user_prompt = (
-        f"Location requirement: {location_requirement}\n\n"
-        f"Job title: {job.get('title', '')}\n"
         f"Company: {job.get('company', '')}\n"
-        f"Listed location: {job.get('location', '')}\n"
         f"URL: {job.get('url', '')}\n\n"
         f"Requirements section:\n{job.get('requirements') or '(empty)'}\n\n"
         f"Resume lines:\n" + "\n".join(f"- {line}" for line in resume_lines)
