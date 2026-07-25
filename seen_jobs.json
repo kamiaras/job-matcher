@@ -1216,5 +1216,26 @@
     "url": "https://jobs.bytedance.com/en/position/7571650125270370613",
     "matched": false,
     "seen_at": "2026-07-24T10:33:19Z"
+  },
+  "greenhouse:anthropic:5370669008": {
+    "title": "Research Scientist, Takeoff Intel",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5370669008",
+    "matched": true,
+    "seen_at": "2026-07-25T10:02:46Z"
+  },
+  "eightfold:mlp.com:755957409324": {
+    "title": "Data Scientist",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755957409324",
+    "matched": false,
+    "seen_at": "2026-07-25T10:02:46Z"
+  },
+  "eightfold:mlp.com:755957169080": {
+    "title": "AI Engineer",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755957169080",
+    "matched": false,
+    "seen_at": "2026-07-25T10:02:46Z"
   }
 }
