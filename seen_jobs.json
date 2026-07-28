@@ -1237,5 +1237,26 @@
     "url": "https://mlp.eightfold.ai/careers/job/755957169080",
     "matched": false,
     "seen_at": "2026-07-25T10:02:46Z"
+  },
+  "greenhouse:point72:8651402002": {
+    "title": "Machine Learning Engineer, GenAI Technology",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/8651402002?gh_jid=8651402002",
+    "matched": false,
+    "seen_at": "2026-07-28T10:50:26Z"
+  },
+  "google:103660095526576838": {
+    "title": "Research Engineer",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/103660095526576838",
+    "matched": true,
+    "seen_at": "2026-07-28T10:50:26Z"
+  },
+  "google:128959858081702598": {
+    "title": "Data Scientist",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/128959858081702598",
+    "matched": true,
+    "seen_at": "2026-07-28T10:50:26Z"
   }
 }
