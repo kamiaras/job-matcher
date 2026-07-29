@@ -1258,5 +1258,19 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/128959858081702598",
     "matched": true,
     "seen_at": "2026-07-28T10:50:26Z"
+  },
+  "meta:1068302586153033": {
+    "title": "Data Scientist, Analytics (Ranking, AI)",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1068302586153033",
+    "matched": true,
+    "seen_at": "2026-07-29T10:53:00Z"
+  },
+  "uber:159672": {
+    "title": "Machine Learning Engineer",
+    "company": "Uber",
+    "url": "https://jobs.uber.com/en/jobs/159672",
+    "matched": false,
+    "seen_at": "2026-07-29T10:53:00Z"
   }
 }
