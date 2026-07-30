@@ -1272,5 +1272,19 @@
     "url": "https://jobs.uber.com/en/jobs/159672",
     "matched": false,
     "seen_at": "2026-07-29T10:53:00Z"
+  },
+  "eightfold:netflix.com:790317037723": {
+    "title": "Data Scientist 4- Marketplace Valuation",
+    "company": "Netflix",
+    "url": "https://explore.jobs.netflix.net/careers/job/790317037723",
+    "matched": false,
+    "seen_at": "2026-07-30T10:36:17Z"
+  },
+  "google:129679741845152454": {
+    "title": "Research Scientist, Google Cloud AI Research",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/129679741845152454",
+    "matched": true,
+    "seen_at": "2026-07-30T10:36:17Z"
   }
 }
