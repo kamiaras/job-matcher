@@ -1286,5 +1286,47 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/129679741845152454",
     "matched": true,
     "seen_at": "2026-07-30T10:36:17Z"
+  },
+  "eightfold:mlp.com:755957852765": {
+    "title": "Quantitative Researcher",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755957852765",
+    "matched": true,
+    "seen_at": "2026-07-31T10:53:03Z"
+  },
+  "eightfold:mlp.com:755957819771": {
+    "title": "Quantitative Researcher - Treasury",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755957819771",
+    "matched": false,
+    "seen_at": "2026-07-31T10:53:03Z"
+  },
+  "meta:1063638336227808": {
+    "title": "Data Scientist - Law Enforcement Analytics & Program",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1063638336227808",
+    "matched": true,
+    "seen_at": "2026-07-31T10:53:03Z"
+  },
+  "meta:1001867045712948": {
+    "title": "Postdoctoral Researcher, AI and Systems Co-design Team",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1001867045712948",
+    "matched": true,
+    "seen_at": "2026-07-31T10:53:03Z"
+  },
+  "ashby:mistral.ai:dabb8608-408a-4675-ba83-5d022e1f4373": {
+    "title": "Applied Scientist/Research Engineer - Palo Alto/NYC",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/dabb8608-408a-4675-ba83-5d022e1f4373",
+    "matched": true,
+    "seen_at": "2026-07-31T10:53:03Z"
+  },
+  "bytedance:7639478976438569221": {
+    "title": "Research Scientist, ByteBrain Infrastructure Operation",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7639478976438569221",
+    "matched": true,
+    "seen_at": "2026-07-31T10:53:03Z"
   }
 }
