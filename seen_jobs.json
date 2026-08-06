@@ -1405,5 +1405,26 @@
     "url": "https://www.tower-research.com/open-positions/?gh_jid=7989358",
     "matched": false,
     "seen_at": "2026-08-05T10:49:59Z"
+  },
+  "uber:303619": {
+    "title": "Machine Learning Engineer II - AV Labs",
+    "company": "Uber",
+    "url": "https://jobs.uber.com/en/jobs/303619",
+    "matched": false,
+    "seen_at": "2026-08-06T10:53:32Z"
+  },
+  "ashby:mistral.ai:0b0c3fab-5c79-43e7-b66c-de7fef7d28b7": {
+    "title": "Applied AI Engineer, ML Infrastructure Engineer / Devops - EMEA",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/0b0c3fab-5c79-43e7-b66c-de7fef7d28b7",
+    "matched": false,
+    "seen_at": "2026-08-06T10:53:32Z"
+  },
+  "lever:spotify:5e91f92c-7487-40c5-92d8-b335b3b52ae9": {
+    "title": "Data Scientist",
+    "company": "Spotify",
+    "url": "https://jobs.lever.co/spotify/5e91f92c-7487-40c5-92d8-b335b3b52ae9",
+    "matched": false,
+    "seen_at": "2026-08-06T10:53:32Z"
   }
 }
