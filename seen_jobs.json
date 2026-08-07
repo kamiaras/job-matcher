@@ -1426,5 +1426,26 @@
     "url": "https://jobs.lever.co/spotify/5e91f92c-7487-40c5-92d8-b335b3b52ae9",
     "matched": false,
     "seen_at": "2026-08-06T10:53:32Z"
+  },
+  "greenhouse:anthropic:5057647008": {
+    "title": "Applied AI Engineer, Enterprise Tech",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5057647008",
+    "matched": false,
+    "seen_at": "2026-08-07T09:12:47Z"
+  },
+  "ashby:mistral.ai:2ed434c7-2e1d-4acd-acb2-01edaa4a1208": {
+    "title": "Applied Scientist/Research Engineer, EMEA",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/2ed434c7-2e1d-4acd-acb2-01edaa4a1208",
+    "matched": true,
+    "seen_at": "2026-08-07T09:12:47Z"
+  },
+  "greenhouse:doordashusa:8113186": {
+    "title": "Machine Learning Engineer, Drive",
+    "company": "DoorDash",
+    "url": "https://job-boards.greenhouse.io/doordashusa/jobs/8113186",
+    "matched": false,
+    "seen_at": "2026-08-07T09:12:47Z"
   }
 }
