@@ -1461,5 +1461,68 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/109896651643986630",
     "matched": false,
     "seen_at": "2026-08-10T09:36:53Z"
+  },
+  "ashby:openai:3254f6a7-6353-4a77-beec-f37b832c99ae": {
+    "title": "Applied AI Engineer, Digital Natives",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/3254f6a7-6353-4a77-beec-f37b832c99ae",
+    "matched": false,
+    "seen_at": "2026-08-11T09:11:23Z"
+  },
+  "ashby:openai:5c3a17db-62f1-4145-93b0-2f207d4d4af8": {
+    "title": "Applied AI Engineer, Digital Natives",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/5c3a17db-62f1-4145-93b0-2f207d4d4af8",
+    "matched": false,
+    "seen_at": "2026-08-11T09:11:23Z"
+  },
+  "ashby:openai:44d19f5f-a5da-4226-9d1a-0147604773eb": {
+    "title": "Applied AI Engineer, Enterprise",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/44d19f5f-a5da-4226-9d1a-0147604773eb",
+    "matched": true,
+    "seen_at": "2026-08-11T09:11:23Z"
+  },
+  "ashby:openai:01091aed-427d-4e10-8cdb-fb500cf55bb9": {
+    "title": "Applied AI Engineer, Enterprise",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/01091aed-427d-4e10-8cdb-fb500cf55bb9",
+    "matched": false,
+    "seen_at": "2026-08-11T09:11:23Z"
+  },
+  "eightfold:mlp.com:755954423961": {
+    "title": "Applied AI Engineer",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755954423961",
+    "matched": true,
+    "seen_at": "2026-08-11T09:11:23Z"
+  },
+  "meta:1612727887131849": {
+    "title": "Research Scientist, Infrastructure Modeling and Reliability",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1612727887131849",
+    "matched": false,
+    "seen_at": "2026-08-11T09:11:23Z"
+  },
+  "meta:952809451162824": {
+    "title": "Postdoctoral Researcher, AI and Systems Co-design Team",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/952809451162824",
+    "matched": true,
+    "seen_at": "2026-08-11T09:11:23Z"
+  },
+  "greenhouse:towerresearchcapital:8095921": {
+    "title": "Machine Learning Research Engineer",
+    "company": "Tower Research",
+    "url": "https://www.tower-research.com/open-positions/?gh_jid=8095921",
+    "matched": false,
+    "seen_at": "2026-08-11T09:11:23Z"
+  },
+  "lever:spotify:73e87af2-1cf9-4aa2-bf3f-032cd2c3b05c": {
+    "title": "Data Scientist, Finance Data & Insights",
+    "company": "Spotify",
+    "url": "https://jobs.lever.co/spotify/73e87af2-1cf9-4aa2-bf3f-032cd2c3b05c",
+    "matched": false,
+    "seen_at": "2026-08-11T09:11:23Z"
   }
 }
