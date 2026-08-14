@@ -1580,5 +1580,33 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/126059257823929030",
     "matched": true,
     "seen_at": "2026-08-13T09:25:21Z"
+  },
+  "greenhouse:jumptrading:7557793": {
+    "title": "Derivatives Quantitative Researcher | Trading Team",
+    "company": "Jump Trading",
+    "url": "https://www.jumptrading.com/hr/job?gh_jid=7557793",
+    "matched": false,
+    "seen_at": "2026-08-14T09:21:06Z"
+  },
+  "meta:2947322545617694": {
+    "title": "AI Research Scientist, Physical AI",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2947322545617694",
+    "matched": true,
+    "seen_at": "2026-08-14T09:21:06Z"
+  },
+  "greenhouse:fiveringsllc:5047415008": {
+    "title": "Recent Graduate - Trading Assistant (NYC)",
+    "company": "Five Rings",
+    "url": "https://job-boards.greenhouse.io/fiveringsllc/jobs/5047415008",
+    "matched": true,
+    "seen_at": "2026-08-14T09:21:06Z"
+  },
+  "bytedance:7598744113393993989": {
+    "title": "Research Engineer/Scientist, Efficient Models",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7598744113393993989",
+    "matched": false,
+    "seen_at": "2026-08-14T09:21:06Z"
   }
 }
