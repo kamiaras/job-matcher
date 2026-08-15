@@ -1608,5 +1608,19 @@
     "url": "https://jobs.bytedance.com/en/position/7598744113393993989",
     "matched": false,
     "seen_at": "2026-08-14T09:21:06Z"
+  },
+  "ashby:openai:0ed5f6c7-3977-4da9-9961-202fe76de456": {
+    "title": "Applied AI Engineer, Digital Natives",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/0ed5f6c7-3977-4da9-9961-202fe76de456",
+    "matched": false,
+    "seen_at": "2026-08-15T08:41:36Z"
+  },
+  "ashby:langchain:bdc96ffd-2a95-4d63-bf8f-193574961e00": {
+    "title": "Research Engineer, LangSmith Engine",
+    "company": "LangChain",
+    "url": "https://jobs.ashbyhq.com/langchain/bdc96ffd-2a95-4d63-bf8f-193574961e00",
+    "matched": false,
+    "seen_at": "2026-08-15T08:41:36Z"
   }
 }
