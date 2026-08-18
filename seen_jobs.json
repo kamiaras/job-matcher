@@ -1636,5 +1636,12 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/97189514157400774",
     "matched": false,
     "seen_at": "2026-08-17T08:56:53Z"
+  },
+  "greenhouse:stripe:8137997": {
+    "title": "Machine Learning Engineer",
+    "company": "Stripe",
+    "url": "https://stripe.com/jobs/search?gh_jid=8137997",
+    "matched": false,
+    "seen_at": "2026-08-18T08:50:06Z"
   }
 }
