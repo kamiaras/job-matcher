@@ -1657,5 +1657,33 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/107002603895694022",
     "matched": false,
     "seen_at": "2026-08-20T08:49:34Z"
+  },
+  "lever:zoox:51838a63-2dde-44dc-9c3e-757f35b9690f": {
+    "title": "Contract Student Worker - Data Scientist",
+    "company": "Zoox",
+    "url": "https://jobs.lever.co/zoox/51838a63-2dde-44dc-9c3e-757f35b9690f",
+    "matched": false,
+    "seen_at": "2026-08-21T08:54:49Z"
+  },
+  "google:140136068971143878": {
+    "title": "Research Scientist, Stitch",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/140136068971143878",
+    "matched": false,
+    "seen_at": "2026-08-21T08:54:49Z"
+  },
+  "meta:2045172806126214": {
+    "title": "Research Scientist, Quantitative Growth Research",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2045172806126214",
+    "matched": true,
+    "seen_at": "2026-08-21T08:54:49Z"
+  },
+  "citadel_securities:research-engineer": {
+    "title": "Research Engineer",
+    "company": "Citadel Securities",
+    "url": "https://www.citadelsecurities.com/careers/details/research-engineer/",
+    "matched": false,
+    "seen_at": "2026-08-21T08:54:49Z"
   }
 }
