@@ -1699,5 +1699,12 @@
     "url": "https://jobs.ashbyhq.com/openai/b46ffd99-f9f2-440c-ac13-448eb7911ad6",
     "matched": false,
     "seen_at": "2026-08-23T08:43:48Z"
+  },
+  "meta:2207519130043101": {
+    "title": "Research Engineer, Synthetic Data Generation",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2207519130043101",
+    "matched": true,
+    "seen_at": "2026-08-25T08:56:31Z"
   }
 }
