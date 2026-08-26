@@ -1706,5 +1706,19 @@
     "url": "https://www.metacareers.com/jobs/2207519130043101",
     "matched": true,
     "seen_at": "2026-08-25T08:56:31Z"
+  },
+  "meta:2204251023754472": {
+    "title": "Data Scientist, Finance (Infrastructure & AI)",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2204251023754472",
+    "matched": true,
+    "seen_at": "2026-08-26T08:58:32Z"
+  },
+  "citadel:quantitative-researcher-phd-graduate-us": {
+    "title": "Quantitative Researcher – PhD Graduate (US)",
+    "company": "Citadel",
+    "url": "https://www.citadel.com/careers/details/quantitative-researcher-phd-graduate-us/",
+    "matched": false,
+    "seen_at": "2026-08-26T08:58:32Z"
   }
 }
