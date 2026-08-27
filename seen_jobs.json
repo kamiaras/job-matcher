@@ -1720,5 +1720,26 @@
     "url": "https://www.citadel.com/careers/details/quantitative-researcher-phd-graduate-us/",
     "matched": false,
     "seen_at": "2026-08-26T08:58:32Z"
+  },
+  "ashby:langchain:47ad420c-9302-4a4f-a35f-7dd29e1d9d28": {
+    "title": "AI Engineer, Enablement",
+    "company": "LangChain",
+    "url": "https://jobs.ashbyhq.com/langchain/47ad420c-9302-4a4f-a35f-7dd29e1d9d28",
+    "matched": false,
+    "seen_at": "2026-08-27T19:07:34Z"
+  },
+  "google:137624498797978310": {
+    "title": "Research Scientist, Paradigms of Intelligence",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/137624498797978310",
+    "matched": true,
+    "seen_at": "2026-08-27T19:07:34Z"
+  },
+  "greenhouse:imc:4823836101": {
+    "title": "Graduate Performance Engineer",
+    "company": "IMC",
+    "url": "https://job-boards.eu.greenhouse.io/imc/jobs/4823836101",
+    "matched": true,
+    "seen_at": "2026-08-27T19:07:34Z"
   }
 }
