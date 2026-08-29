@@ -1748,5 +1748,12 @@
     "url": "https://www.metacareers.com/jobs/1464755102365911",
     "matched": true,
     "seen_at": "2026-08-28T20:10:38Z"
+  },
+  "ashby:montecarlodata:bee6315c-3bc5-49b8-a6c0-1c36b3b59de6": {
+    "title": "Applied AI Engineer",
+    "company": "Monte Carlo",
+    "url": "https://jobs.ashbyhq.com/montecarlodata/bee6315c-3bc5-49b8-a6c0-1c36b3b59de6",
+    "matched": false,
+    "seen_at": "2026-08-29T13:51:46Z"
   }
 }
