@@ -1755,5 +1755,19 @@
     "url": "https://jobs.ashbyhq.com/montecarlodata/bee6315c-3bc5-49b8-a6c0-1c36b3b59de6",
     "matched": false,
     "seen_at": "2026-08-29T13:51:46Z"
+  },
+  "google:143060630314590918": {
+    "title": "Data Scientist",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/143060630314590918",
+    "matched": true,
+    "seen_at": "2026-08-31T16:08:27Z"
+  },
+  "greenhouse:aqr:8088184": {
+    "title": "Data Scientist, Machine Learning",
+    "company": "AQR Capital Management",
+    "url": "https://careers.aqr.com/jobs?gh_jid=8088184&gh_jid=8088184",
+    "matched": false,
+    "seen_at": "2026-08-31T16:08:27Z"
   }
 }
