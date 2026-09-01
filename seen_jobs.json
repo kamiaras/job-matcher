@@ -1769,5 +1769,33 @@
     "url": "https://careers.aqr.com/jobs?gh_jid=8088184&gh_jid=8088184",
     "matched": false,
     "seen_at": "2026-08-31T16:08:27Z"
+  },
+  "greenhouse:anthropic:5129961008": {
+    "title": "Applied AI Research (Capabilities)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5129961008",
+    "matched": false,
+    "seen_at": "2026-09-01T13:26:01Z"
+  },
+  "google:79244322603442886": {
+    "title": "Research Scientist, Cloud AI Research",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/79244322603442886",
+    "matched": false,
+    "seen_at": "2026-09-01T13:26:01Z"
+  },
+  "google:72346639485805254": {
+    "title": "Data Scientist",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/72346639485805254",
+    "matched": false,
+    "seen_at": "2026-09-01T13:26:01Z"
+  },
+  "google:134517974722585286": {
+    "title": "Data Scientist",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/134517974722585286",
+    "matched": false,
+    "seen_at": "2026-09-01T13:26:01Z"
   }
 }
