@@ -1797,5 +1797,47 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/134517974722585286",
     "matched": false,
     "seen_at": "2026-09-01T13:26:01Z"
+  },
+  "ashby:openai:be7b1bf5-37ab-40f7-9ec1-e9732244f12a": {
+    "title": "Applied AI Engineer, Cyber, Government",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/be7b1bf5-37ab-40f7-9ec1-e9732244f12a",
+    "matched": false,
+    "seen_at": "2026-09-02T12:49:13Z"
+  },
+  "google:100897949982040774": {
+    "title": "Research Data Scientist, Merchant Shopping",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/100897949982040774",
+    "matched": true,
+    "seen_at": "2026-09-02T12:49:13Z"
+  },
+  "google:143337312107799238": {
+    "title": "Research Engineer, Gemini Multi-turn",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/143337312107799238",
+    "matched": false,
+    "seen_at": "2026-09-02T12:49:13Z"
+  },
+  "meta:1120530887203915": {
+    "title": "Research Scientist, AI & Systems Co-Design (PhD)",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1120530887203915",
+    "matched": false,
+    "seen_at": "2026-09-02T12:49:13Z"
+  },
+  "citadel:quantitative-researcher-data-strategies-group": {
+    "title": "Quantitative Researcher – Data Strategies Group",
+    "company": "Citadel",
+    "url": "https://www.citadel.com/careers/details/quantitative-researcher-data-strategies-group/",
+    "matched": true,
+    "seen_at": "2026-09-02T12:49:13Z"
+  },
+  "greenhouse:lyft:8772592002": {
+    "title": "Data Scientist",
+    "company": "Lyft",
+    "url": "https://app.careerpuck.com/job-board/lyft/job/8772592002?gh_jid=8772592002",
+    "matched": false,
+    "seen_at": "2026-09-02T12:49:13Z"
   }
 }
