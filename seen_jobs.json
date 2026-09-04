@@ -1853,5 +1853,33 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/94927533123740358",
     "matched": false,
     "seen_at": "2026-09-03T12:50:58Z"
+  },
+  "google:100176223677620934": {
+    "title": "Research Scientist, Paradigms of Intelligence",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/100176223677620934",
+    "matched": false,
+    "seen_at": "2026-09-04T12:45:24Z"
+  },
+  "meta:1740938817139250": {
+    "title": "Research Scientist, Server Demand",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1740938817139250",
+    "matched": false,
+    "seen_at": "2026-09-04T12:45:24Z"
+  },
+  "ashby:mistral.ai:51c1df24-53f1-4ec9-9523-cd40c88e00cf": {
+    "title": "Research Engineer, ML Platform",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/51c1df24-53f1-4ec9-9523-cd40c88e00cf",
+    "matched": false,
+    "seen_at": "2026-09-04T12:45:24Z"
+  },
+  "greenhouse:airbnb:8031907": {
+    "title": "Data Scientist, Platform",
+    "company": "Airbnb",
+    "url": "https://careers.airbnb.com/positions/8031907?gh_jid=8031907",
+    "matched": false,
+    "seen_at": "2026-09-04T12:45:24Z"
   }
 }
