@@ -1881,5 +1881,47 @@
     "url": "https://careers.airbnb.com/positions/8031907?gh_jid=8031907",
     "matched": false,
     "seen_at": "2026-09-04T12:45:24Z"
+  },
+  "greenhouse:anthropic:5390811008": {
+    "title": "Applied AI, Research Engineer",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390811008",
+    "matched": false,
+    "seen_at": "2026-09-05T11:53:05Z"
+  },
+  "greenhouse:waymo:8177515": {
+    "title": "Data Scientist",
+    "company": "Waymo",
+    "url": "https://careers.withwaymo.com/jobs?gh_jid=8177515",
+    "matched": true,
+    "seen_at": "2026-09-05T11:53:05Z"
+  },
+  "meta:1135049325524963": {
+    "title": "Research Scientist - Multi-modal AI & Efficient Generative Models",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1135049325524963",
+    "matched": true,
+    "seen_at": "2026-09-05T11:53:05Z"
+  },
+  "ashby:mistral.ai:1808c0af-7352-4d0b-9e35-d3d6704e4759": {
+    "title": "Research Engineer, Forge",
+    "company": "Mistral AI",
+    "url": "https://jobs.ashbyhq.com/mistral.ai/1808c0af-7352-4d0b-9e35-d3d6704e4759",
+    "matched": true,
+    "seen_at": "2026-09-05T11:53:05Z"
+  },
+  "greenhouse:lyft:8688633002": {
+    "title": "Machine Learning Engineer",
+    "company": "Lyft",
+    "url": "https://app.careerpuck.com/job-board/lyft/job/8688633002?gh_jid=8688633002",
+    "matched": false,
+    "seen_at": "2026-09-05T11:53:05Z"
+  },
+  "greenhouse:lyft:8689127002": {
+    "title": "Machine Learning Engineer",
+    "company": "Lyft",
+    "url": "https://app.careerpuck.com/job-board/lyft/job/8689127002?gh_jid=8689127002",
+    "matched": false,
+    "seen_at": "2026-09-05T11:53:05Z"
   }
 }
