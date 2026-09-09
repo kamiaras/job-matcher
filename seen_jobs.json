@@ -1923,5 +1923,40 @@
     "url": "https://app.careerpuck.com/job-board/lyft/job/8689127002?gh_jid=8689127002",
     "matched": false,
     "seen_at": "2026-09-05T11:53:05Z"
+  },
+  "greenhouse:anthropic:5416882008": {
+    "title": "Research Engineer, Takeoff Intel",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5416882008",
+    "matched": true,
+    "seen_at": "2026-09-09T13:00:19Z"
+  },
+  "greenhouse:waymo:8180692": {
+    "title": "Research Scientist, Map Scalability",
+    "company": "Waymo",
+    "url": "https://careers.withwaymo.com/jobs?gh_jid=8180692",
+    "matched": false,
+    "seen_at": "2026-09-09T13:00:19Z"
+  },
+  "ashby:openai:485cda77-5d8f-4aaa-bca5-916b011477e6": {
+    "title": "Applied AI Engineer, Government",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/485cda77-5d8f-4aaa-bca5-916b011477e6",
+    "matched": false,
+    "seen_at": "2026-09-09T13:00:19Z"
+  },
+  "google:113097198995940038": {
+    "title": "Research Scientist",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/113097198995940038",
+    "matched": false,
+    "seen_at": "2026-09-09T13:00:19Z"
+  },
+  "meta:2561197087738216": {
+    "title": "Research Scientist, Systems ML - HW/SW Co-Design",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2561197087738216",
+    "matched": false,
+    "seen_at": "2026-09-09T13:00:19Z"
   }
 }
