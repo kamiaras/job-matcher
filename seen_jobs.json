@@ -1958,5 +1958,33 @@
     "url": "https://www.metacareers.com/jobs/2561197087738216",
     "matched": false,
     "seen_at": "2026-09-09T13:00:19Z"
+  },
+  "lever:zoox:d736debf-c361-4a7c-81fd-6c3125ab03c0": {
+    "title": "Machine Learning Engineer - Behavior Models for Road Users",
+    "company": "Zoox",
+    "url": "https://jobs.lever.co/zoox/d736debf-c361-4a7c-81fd-6c3125ab03c0",
+    "matched": false,
+    "seen_at": "2026-09-10T12:57:14Z"
+  },
+  "eightfold:netflix.com:790317917705": {
+    "title": "AI Research Scientist 4 - Generative Models, Recommender Systems",
+    "company": "Netflix",
+    "url": "https://explore.jobs.netflix.net/careers/job/790317917705",
+    "matched": true,
+    "seen_at": "2026-09-10T12:57:14Z"
+  },
+  "greenhouse:stripe:8172503": {
+    "title": "Abuse Research Engineer",
+    "company": "Stripe",
+    "url": "https://stripe.com/jobs/search?gh_jid=8172503",
+    "matched": false,
+    "seen_at": "2026-09-10T12:57:14Z"
+  },
+  "greenhouse:drweng:8186711": {
+    "title": "Platform Engineer - AI Engineering",
+    "company": "DRW",
+    "url": "https://job-boards.greenhouse.io/drweng/jobs/8186711",
+    "matched": false,
+    "seen_at": "2026-09-10T12:57:14Z"
   }
 }
