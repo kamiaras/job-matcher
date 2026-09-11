@@ -1986,5 +1986,33 @@
     "url": "https://job-boards.greenhouse.io/drweng/jobs/8186711",
     "matched": false,
     "seen_at": "2026-09-10T12:57:14Z"
+  },
+  "greenhouse:scaleai:4631848005": {
+    "title": "Machine Learning Engineer, Public Sector",
+    "company": "Scale AI",
+    "url": "https://job-boards.greenhouse.io/scaleai/jobs/4631848005",
+    "matched": false,
+    "seen_at": "2026-09-11T12:52:57Z"
+  },
+  "ashby:openai:552396f4-dc83-43de-9230-6301e5f461bd": {
+    "title": "Partner Applied AI Engineer",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/552396f4-dc83-43de-9230-6301e5f461bd",
+    "matched": false,
+    "seen_at": "2026-09-11T12:52:57Z"
+  },
+  "google:87723107736789702": {
+    "title": "AI Engineer, Advanced Solutions Lab, Google Cloud",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/87723107736789702",
+    "matched": false,
+    "seen_at": "2026-09-11T12:52:57Z"
+  },
+  "meta:1440563421299756": {
+    "title": "Research Engineer - Embedded Systems",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1440563421299756",
+    "matched": false,
+    "seen_at": "2026-09-11T12:52:57Z"
   }
 }
