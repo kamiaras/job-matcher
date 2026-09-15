@@ -2021,5 +2021,26 @@
     "url": "https://www.metacareers.com/jobs/1322339860965769",
     "matched": false,
     "seen_at": "2026-09-14T15:01:08Z"
+  },
+  "meta:2202484277812909": {
+    "title": "Research Scientist, Server Demand Forecasting",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2202484277812909",
+    "matched": true,
+    "seen_at": "2026-09-15T13:30:04Z"
+  },
+  "citadel:quantitative-research-engineer-phd-graduate-us": {
+    "title": "Quantitative Research Engineer – PhD Graduate (US)",
+    "company": "Citadel",
+    "url": "https://www.citadel.com/careers/details/quantitative-research-engineer-phd-graduate-us/",
+    "matched": true,
+    "seen_at": "2026-09-15T13:30:04Z"
+  },
+  "greenhouse:fiveringsllc:5414190008": {
+    "title": "Recent Graduate - Trading Assistant (NYC)",
+    "company": "Five Rings",
+    "url": "https://job-boards.greenhouse.io/fiveringsllc/jobs/5414190008",
+    "matched": true,
+    "seen_at": "2026-09-15T13:30:04Z"
   }
 }
