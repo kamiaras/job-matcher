@@ -2042,5 +2042,19 @@
     "url": "https://job-boards.greenhouse.io/fiveringsllc/jobs/5414190008",
     "matched": true,
     "seen_at": "2026-09-15T13:30:04Z"
+  },
+  "greenhouse:point72:8811449002": {
+    "title": "UC Berkeley PhD Coffee Chats Fall 2026",
+    "company": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/8811449002?gh_jid=8811449002",
+    "matched": true,
+    "seen_at": "2026-09-16T13:24:52Z"
+  },
+  "meta:2010995136240732": {
+    "title": "Research Scientist, Multi-Modal Understanding & Synthesis",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2010995136240732",
+    "matched": false,
+    "seen_at": "2026-09-16T13:24:52Z"
   }
 }
