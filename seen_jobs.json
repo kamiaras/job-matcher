@@ -2056,5 +2056,33 @@
     "url": "https://www.metacareers.com/jobs/2010995136240732",
     "matched": false,
     "seen_at": "2026-09-16T13:24:52Z"
+  },
+  "google:87508500032168646": {
+    "title": "Research Scientist, Google Research",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/87508500032168646",
+    "matched": true,
+    "seen_at": "2026-09-17T13:20:48Z"
+  },
+  "meta:1801570277640267": {
+    "title": "Research Scientist - Demand Forecasting",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1801570277640267",
+    "matched": true,
+    "seen_at": "2026-09-17T13:20:48Z"
+  },
+  "meta:2022123658430354": {
+    "title": "Research Scientist - Demand Forecasting",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/2022123658430354",
+    "matched": true,
+    "seen_at": "2026-09-17T13:20:48Z"
+  },
+  "greenhouse:stripe:8209337": {
+    "title": "Data Scientist, Experimental Projects",
+    "company": "Stripe",
+    "url": "https://stripe.com/jobs/search?gh_jid=8209337",
+    "matched": false,
+    "seen_at": "2026-09-17T13:20:48Z"
   }
 }
