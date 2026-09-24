@@ -2133,5 +2133,33 @@
     "url": "https://www.metacareers.com/jobs/1062583486402341",
     "matched": false,
     "seen_at": "2026-09-23T13:37:55Z"
+  },
+  "google:118303299580371654": {
+    "title": "Research Scientist, Earth AI",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/118303299580371654",
+    "matched": false,
+    "seen_at": "2026-09-24T13:33:19Z"
+  },
+  "meta:1881878742790429": {
+    "title": "Data Scientist, Infrastructure Finance",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1881878742790429",
+    "matched": false,
+    "seen_at": "2026-09-24T13:33:19Z"
+  },
+  "greenhouse:databricks:8091041002": {
+    "title": "Applied AI Engineer",
+    "company": "Databricks",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8091041002",
+    "matched": false,
+    "seen_at": "2026-09-24T13:33:19Z"
+  },
+  "bytedance:7362026100950321459": {
+    "title": "Research Scientist (Seed Model - Vision)",
+    "company": "ByteDance",
+    "url": "https://jobs.bytedance.com/en/position/7362026100950321459",
+    "matched": false,
+    "seen_at": "2026-09-24T13:33:19Z"
   }
 }
