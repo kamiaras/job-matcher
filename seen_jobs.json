@@ -2182,5 +2182,33 @@
     "url": "https://stripe.com/jobs/search?gh_jid=8224915",
     "matched": false,
     "seen_at": "2026-09-28T16:45:15Z"
+  },
+  "greenhouse:anthropic:5438044008": {
+    "title": "Research Engineer / Research Scientist, RL Frontiers",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5438044008",
+    "matched": false,
+    "seen_at": "2026-09-30T14:54:32Z"
+  },
+  "google:81035962842260166": {
+    "title": "Research Scientist, AI and Economics",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/81035962842260166",
+    "matched": false,
+    "seen_at": "2026-09-30T14:54:32Z"
+  },
+  "google:78986095210963654": {
+    "title": "UX Quantitative Researcher, Tech for Social Impact",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/78986095210963654",
+    "matched": false,
+    "seen_at": "2026-09-30T14:54:32Z"
+  },
+  "greenhouse:stripe:8240322": {
+    "title": "Abuse Research Engineer",
+    "company": "Stripe",
+    "url": "https://stripe.com/jobs/search?gh_jid=8240322",
+    "matched": false,
+    "seen_at": "2026-09-30T14:54:32Z"
   }
 }
