@@ -2210,5 +2210,26 @@
     "url": "https://stripe.com/jobs/search?gh_jid=8240322",
     "matched": false,
     "seen_at": "2026-09-30T14:54:32Z"
+  },
+  "eightfold:mlp.com:755958934968": {
+    "title": "Quantitative Researcher",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755958934968",
+    "matched": true,
+    "seen_at": "2026-10-01T15:24:02Z"
+  },
+  "meta:1631242335025906": {
+    "title": "Research Scientist, Polymer Physicist",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1631242335025906",
+    "matched": false,
+    "seen_at": "2026-10-01T15:24:02Z"
+  },
+  "greenhouse:stripe:5601879": {
+    "title": "Data Scientist",
+    "company": "Stripe",
+    "url": "https://stripe.com/jobs/search?gh_jid=5601879",
+    "matched": false,
+    "seen_at": "2026-10-01T15:24:02Z"
   }
 }
