@@ -2245,5 +2245,12 @@
     "url": "https://app.careerpuck.com/job-board/lyft/job/8856443002?gh_jid=8856443002",
     "matched": false,
     "seen_at": "2026-10-02T14:45:22Z"
+  },
+  "google:86603243332739782": {
+    "title": "Research Scientist, Google Research",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/86603243332739782",
+    "matched": true,
+    "seen_at": "2026-10-03T13:19:01Z"
   }
 }
