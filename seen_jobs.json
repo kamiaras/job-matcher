@@ -2294,5 +2294,19 @@
     "url": "https://job-boards.greenhouse.io/drweng/jobs/8256366",
     "matched": false,
     "seen_at": "2026-10-06T15:03:11Z"
+  },
+  "greenhouse:anthropic:5445410008": {
+    "title": "Applied AI Engineer, Public Sector",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5445410008",
+    "matched": false,
+    "seen_at": "2026-10-07T15:29:04Z"
+  },
+  "google:96109534967145158": {
+    "title": "UX Quantitative Researcher, Geo Makers",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/96109534967145158",
+    "matched": false,
+    "seen_at": "2026-10-07T15:29:04Z"
   }
 }
