@@ -2308,5 +2308,26 @@
     "url": "https://www.google.com/about/careers/applications/jobs/results/96109534967145158",
     "matched": false,
     "seen_at": "2026-10-07T15:29:04Z"
+  },
+  "eightfold:mlp.com:755959070627": {
+    "title": "Quant Researcher/Data Scientist - Volatility Alpha Technology",
+    "company": "Millennium Management",
+    "url": "https://mlp.eightfold.ai/careers/job/755959070627",
+    "matched": false,
+    "seen_at": "2026-10-08T15:33:47Z"
+  },
+  "meta:1951742679122711": {
+    "title": "Research Scientist, Server Demand",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1951742679122711",
+    "matched": false,
+    "seen_at": "2026-10-08T15:33:47Z"
+  },
+  "greenhouse:stripe:8144196": {
+    "title": "AI Engineer",
+    "company": "Stripe",
+    "url": "https://stripe.com/jobs/search?gh_jid=8144196",
+    "matched": false,
+    "seen_at": "2026-10-08T15:33:47Z"
   }
 }
