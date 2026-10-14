@@ -2406,5 +2406,12 @@
     "url": "https://www.metacareers.com/jobs/980665651060694",
     "matched": false,
     "seen_at": "2026-10-13T15:51:41Z"
+  },
+  "ashby:openai:a01fc9ed-de08-4326-9206-4ee3f08000dc": {
+    "title": "Machine Learning Engineer, Implicit Signals",
+    "company": "OpenAI",
+    "url": "https://jobs.ashbyhq.com/openai/a01fc9ed-de08-4326-9206-4ee3f08000dc",
+    "matched": true,
+    "seen_at": "2026-10-14T13:36:21Z"
   }
 }
