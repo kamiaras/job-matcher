@@ -2483,5 +2483,33 @@
     "url": "https://app.careerpuck.com/job-board/lyft/job/8896671002?gh_jid=8896671002",
     "matched": false,
     "seen_at": "2026-10-17T12:11:11Z"
+  },
+  "google:133508980604314310": {
+    "title": "Research Scientist, Neural Rendering, Google Beam",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/133508980604314310",
+    "matched": false,
+    "seen_at": "2026-10-20T13:35:27Z"
+  },
+  "meta:1710830543977644": {
+    "title": "AI Research Scientist, MRS Knowledge",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1710830543977644",
+    "matched": false,
+    "seen_at": "2026-10-20T13:35:27Z"
+  },
+  "meta:1813519376505749": {
+    "title": "AI Research Scientist, MRS Knowledge",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/1813519376505749",
+    "matched": true,
+    "seen_at": "2026-10-20T13:35:27Z"
+  },
+  "meta:965295459333070": {
+    "title": "Research Scientist, Machine Learning",
+    "company": "Meta",
+    "url": "https://www.metacareers.com/jobs/965295459333070",
+    "matched": true,
+    "seen_at": "2026-10-20T13:35:27Z"
   }
 }
