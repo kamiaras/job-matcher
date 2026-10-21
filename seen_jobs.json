@@ -2511,5 +2511,26 @@
     "url": "https://www.metacareers.com/jobs/965295459333070",
     "matched": true,
     "seen_at": "2026-10-20T13:35:27Z"
+  },
+  "greenhouse:waymo:6688617": {
+    "title": "Machine Learning Engineer, Simulation",
+    "company": "Waymo",
+    "url": "https://careers.withwaymo.com/jobs?gh_jid=6688617",
+    "matched": false,
+    "seen_at": "2026-10-21T13:45:04Z"
+  },
+  "google:91797366327124678": {
+    "title": "Research Scientist, Science AI, Google Research",
+    "company": "Google",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/91797366327124678",
+    "matched": true,
+    "seen_at": "2026-10-21T13:45:04Z"
+  },
+  "greenhouse:airbnb:7826337": {
+    "title": "Machine Learning Engineer, Assistance Engineering",
+    "company": "Airbnb",
+    "url": "https://careers.airbnb.com/positions/7826337?gh_jid=7826337",
+    "matched": false,
+    "seen_at": "2026-10-21T13:45:04Z"
   }
 }
