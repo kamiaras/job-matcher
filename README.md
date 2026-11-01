@@ -1,99 +1,113 @@
-# Automated Job Matching System
+# Job Matcher
 
-A daily pipeline that scrapes public ATS job boards, applies deterministic
-pre-filters, and uses Gemini to strictly check each posting’s **requirements**
-against your resume. Matches show up in the GitHub Actions summary; every
-processed job is remembered in `seen_jobs.json` so it isn’t scored again.
+Fetch job listings, filter them by title and location, and use Gemini to compare their hard requirements with a supplied resume. Run it locally when needed.
 
-## What it does
+Daily automation has been removed. The tool runs only when you invoke it.
 
-Each run (cron at 08:00 UTC, or manual workflow dispatch):
-
-1. **Fetch** openings from companies in `config.json` (Greenhouse / Ashby / Lever /
-   Workable / Eightfold / Google Careers / Meta / Uber / Workday / Amazon / Apple /
-   Microsoft / ByteDance / iCIMS API / Bloomberg Avature / LinkedIn / Citadel +
-   Citadel Securities HTML / Two Sigma Avature / D. E. Shaw / Hudson River Trading /
-   Goldman Sachs Higher GraphQL / Oracle Cloud CE e.g. JPMorgan).
-2. **Title match** — keep jobs whose titles match phrases in `titles`.
-3. **Title exclusion** — drop seniority / role markers in `title_exclusions`.
-4. **US location** — drop postings that only list places in `non_us_locations`; keep
-   multi-location jobs that still include a US option (and ambiguous / empty /
-   bare-Remote listings).
-5. **Skip already-seen jobs** — IDs stored in `seen_jobs.json` are ignored.
-6. **Strict LLM match** — Gemini compares the job’s requirements to lines in
-   `resume.txt` (title/location already filtered). Soft preferences, culture
-   blurbs, and “nice to haves” are ignored; a job matches only if every hard
-   requirement is supported by the resume.
-7. **Report & remember** — matches are written to the Actions run Summary; all
-   evaluated jobs are appended to `seen_jobs.json` and committed back to `main`.
-
-If live boards return nothing, a few placeholder sample jobs exercise the matcher
-end-to-end.
-
-## Project layout
-
-| File | Role |
-| --- | --- |
-| `scraper.py` | Fetch → filter → match → persist |
-| `config.json` | Target titles, exclusions, non-US locations, ATS boards |
-| `resume.txt` | One experience claim per line (`#` comments / blanks ignored) |
-| `job_matcher/prompts/system_match.txt` | Gemini system prompt for requirements matching |
-| `seen_jobs.json` | Dedup memory of processed jobs |
-| `.github/workflows/daily_job_search.yml` | Daily GitHub Actions runner |
+The repository includes adapters for several public recruiting sites. Their behavior varies by site, and site changes can break an adapter. Review the results before using them.
 
 ## Setup
 
-1. **Push this repo to GitHub** (default branch `main`).
+Use Python 3.12 and a virtual environment:
 
-2. **Add the repository secret** `GEMINI_API_KEY`  
-   GitHub → Settings → Secrets and variables → Actions → New repository secret.
+```bash
+python -m venv .venv
+```
 
-   For local runs:
+Activate it with `source .venv/bin/activate` on macOS/Linux or `.venv\Scripts\Activate.ps1` in PowerShell. Then install the dependencies and copy the examples:
 
-   ```bash
-   echo 'GEMINI_API_KEY=your_key_here' > .env
-   pip install -r requirements.txt
-   python scraper.py
-   ```
+```bash
+python -m pip install -r requirements.txt
+cp config.example.json config.json
+cp resume.example.txt resume.txt
+cp .env.example .env
+```
 
-3. **Edit targeting and resume**
-   - `config.json` — titles, title exclusions, non-US locations, ATS boards
-   - `resume.txt` — atomic experience lines the matcher can cite
+Edit the local copies:
 
-4. **Run the workflow**  
-   Actions → **Daily Job Search** → Run workflow (or wait for the daily cron).
+- `config.json`: choose title filters and career sites.
+- `resume.txt`: write one factual qualification or experience claim per line. Blank lines and lines starting with `#` are ignored.
+- `.env`: replace the example `GEMINI_API_KEY` value with your key for Gemini matching.
 
-5. **View results**  
-   Matches appear in the Actions run **Summary** tab. Processed IDs land in
-   `seen_jobs.json` on `main`.
+The supplied resume is fictional. The example configuration has no live career sites, so it returns no candidates until you add a source.
 
-## Deterministic dry-run
+## Configure career sites
 
-To inspect what survives title/location filters without calling Gemini or
-updating `seen_jobs.json`:
+The `websites` array selects the sources. For example, replace the placeholder below with a public Greenhouse board identifier:
+
+```json
+{
+  "name": "Example Employer",
+  "type": "greenhouse",
+  "board_token": "replace-with-public-board-token"
+}
+```
+
+Add that object to `websites` in `config.json`. A board identifier is a public URL component, not an API key. Other adapter fields are defined in [`job_matcher/sources/__init__.py`](job_matcher/sources/__init__.py).
+
+Configuration fields:
+
+| Field | Meaning |
+| --- | --- |
+| `titles` | Keep titles containing one of these phrases; an empty list accepts all titles. |
+| `title_exclusions` | Drop titles containing one of these exclusion phrases. |
+| `non_us_locations` | Drop listings containing these location phrases unless a US location is also detected. Empty or ambiguous locations are kept. |
+| `websites` | Career-site entries passed to the source adapters. |
+
+The location filter is US-oriented. It does not verify work authorization or eligibility. If no jobs survive fetching and filtering, the result is an empty candidate list.
+
+## Run
+
+For Gemini matching:
+
+```bash
+python scraper.py
+```
+
+The program prints results and short reasons to the terminal. It records evaluated jobs in the local `seen_jobs.json` file, including match status and processing time. Later runs skip those jobs. Normal matching does not create `candidates.json`.
+
+To inspect title and location filtering without calling Gemini:
 
 ```bash
 python scraper.py --deterministic-only
 ```
 
-Writes survivors to `candidates.json` (gitignored).
+This mode still contacts the configured career sites. It prints the filtered candidates and writes `candidates.json`, but does not update `seen_jobs.json`. It does not need a Gemini API key.
 
-## Optional
+## Inputs and results
 
-- Models default to `gemini-3.5-flash-lite` and `gemini-3.1-flash-lite` (round-robin
-  + failover on 429). Override with `GEMINI_MODELS` (comma-separated) or
-  `GEMINI_MODEL`.
-- Pace Gemini calls with `GEMINI_REQUEST_INTERVAL_SEC` (default: `7`, ~5 RPM per
-  model).
-- Cap work per run with `GEMINI_MAX_JOBS_PER_RUN` (default: `40`); leftovers stay
-  unseen for the next run.
-- Tune 429 retries with `GEMINI_MAX_RETRIES` (default: `8`). Rate-limited jobs are
-  **not** written to `seen_jobs.json`.
+Gemini receives the loaded resume claims and each job's requirements. Supply only the professional information needed for matching. Terminal output may include reasons based on those claims.
 
-## Notes
+Keep your real `config.json`, `resume.txt`, `.env`, `seen_jobs.json`, and `candidates.json` local. These runtime files are ignored by Git. The tracked example files are for sharing and setup.
 
-- Deterministic filters run before the LLM (keeps API spend down).
-- Free-tier Gemini quotas are usually per-model (~5 RPM each); the scraper
-  round-robins Flash-Lite models, fails over on `429`, and stops early rather
-  than burning unseen jobs.
-- Never commit `.env` — it is listed in `.gitignore`.
+The matcher uses the supplied resume without a fixed experience level or degree status. It accepts an alternative degree or experience path only when the job states that path and the resume supports it. Missing information is treated as unsupported, so review a rejection before drawing conclusions about a candidate.
+
+## Model settings
+
+The default model choices are `gemini-3.5-flash-lite` and `gemini-3.1-flash-lite`. The code rotates between them and retries rate-limit errors. Model availability and request limits depend on your API account.
+
+Optional environment settings:
+
+| Variable | Purpose | Default |
+| --- | --- | --- |
+| `GEMINI_MODELS` | Comma-separated model choices; `GEMINI_MODEL` sets a single choice. | Models listed above |
+| `GEMINI_REQUEST_INTERVAL_SEC` | Delay between jobs. | `7` |
+| `GEMINI_MAX_JOBS_PER_RUN` | Limit evaluated jobs per run. | `40` |
+| `GEMINI_MAX_RETRIES` | Maximum attempts for a job. | `8` |
+
+## Offline tests
+
+Run the tests without contacting career sites or Gemini:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+## Code layout
+
+- [`scraper.py`](scraper.py): command-line entry point.
+- [`job_matcher/sources/`](job_matcher/sources/): recruiting-site adapters and sample jobs.
+- [`job_matcher/filters.py`](job_matcher/filters.py): title and location filters.
+- [`job_matcher/matcher.py`](job_matcher/matcher.py): Gemini requests and result parsing.
+- [`job_matcher/prompts/system_match.txt`](job_matcher/prompts/system_match.txt): matching rules.
+- [`job_matcher/persistence.py`](job_matcher/persistence.py): local inputs and state.

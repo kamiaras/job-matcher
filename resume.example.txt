@@ -1,0 +1,9 @@
+# Fictional example profile. Replace these claims in your local resume.txt.
+# One claim per line; this example does not describe a real person.
+
+Completed a bachelor's degree in Accounting at Example College.
+Worked for two years as a data analyst at Example Retail Company.
+Used SQL to prepare weekly inventory and sales reports.
+Built Python and pandas scripts to check and clean transaction data.
+Created Tableau dashboards for store managers.
+Wrote unit tests for data-cleaning functions.

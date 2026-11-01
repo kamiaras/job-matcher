@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 import time
@@ -38,25 +39,15 @@ from job_matcher.persistence import (
     write_candidates_summary,
     write_github_summary,
 )
-from job_matcher.sources import fetch_all, fetch_placeholder
+from job_matcher.sources import fetch_all
 
 load_dotenv(ROOT / ".env")
 
 
 def fetch_jobs(config: dict[str, Any]) -> list[dict[str, str]]:
-    """Fetch from sources, apply deterministic filters, fall back to placeholders."""
+    """Fetch live jobs and apply deterministic filters; empty results stay empty."""
     jobs = fetch_all(config)
-    jobs = filters.apply(jobs, config)
-
-    if not jobs:
-        print("[fetch] no live jobs returned; using placeholder samples")
-        seen_ids: set[str] = set()
-        for job in fetch_placeholder(config):
-            if job["id"] not in seen_ids:
-                seen_ids.add(job["id"])
-                jobs.append(job)
-
-    return jobs
+    return filters.apply(jobs, config)
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -98,6 +89,23 @@ def run_deterministic_only(config: dict[str, Any], seen: dict[str, Any]) -> int:
 
 
 def run_llm_match(config: dict[str, Any], seen: dict[str, Any]) -> int:
+    try:
+        resume_lines = load_resume()
+    except FileNotFoundError:
+        print(
+            "ERROR: resume.txt is missing. Copy resume.example.txt to resume.txt "
+            "in the repository root, then replace the example with your experience.",
+            file=sys.stderr,
+        )
+        return 1
+    if not resume_lines:
+        print(
+            "ERROR: resume.txt has no usable experience lines. "
+            "Add one experience claim per line; blank lines and # comments are ignored.",
+            file=sys.stderr,
+        )
+        return 1
+
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print("ERROR: GEMINI_API_KEY is required (set in .env or environment)", file=sys.stderr)
@@ -107,11 +115,6 @@ def run_llm_match(config: dict[str, Any], seen: dict[str, Any]) -> int:
     request_interval = _env_float("GEMINI_REQUEST_INTERVAL_SEC", DEFAULT_REQUEST_INTERVAL_SEC)
     max_retries = _env_int("GEMINI_MAX_RETRIES", DEFAULT_MAX_RETRIES)
     max_jobs = _env_int("GEMINI_MAX_JOBS_PER_RUN", DEFAULT_MAX_JOBS_PER_RUN)
-    resume_lines = load_resume()
-    if not resume_lines:
-        print("ERROR: resume.txt has no usable experience lines", file=sys.stderr)
-        return 1
-
     all_jobs = fetch_jobs(config)
     unseen = filter_unseen(all_jobs, seen)
     print(f"[models] {', '.join(models)}")
@@ -198,8 +201,34 @@ def run_llm_match(config: dict[str, Any], seen: dict[str, Any]) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    config = load_config()
-    seen = load_seen()
+    try:
+        config = load_config()
+    except FileNotFoundError:
+        print(
+            "ERROR: config.json is missing. Copy config.example.json to config.json "
+            "in the repository root, then edit your search settings.",
+            file=sys.stderr,
+        )
+        return 1
+    except json.JSONDecodeError as exc:
+        print(
+            f"ERROR: config.json is not valid JSON (line {exc.lineno}, column {exc.colno}). "
+            "Correct the file using config.example.json as a guide.",
+            file=sys.stderr,
+        )
+        return 1
+    if not isinstance(config, dict):
+        print("ERROR: config.json must contain a JSON object. See config.example.json.", file=sys.stderr)
+        return 1
+    try:
+        seen = load_seen()
+    except json.JSONDecodeError as exc:
+        print(
+            f"ERROR: seen_jobs.json is not valid JSON (line {exc.lineno}, column {exc.colno}). "
+            "Restore or repair it to preserve your previously processed job IDs.",
+            file=sys.stderr,
+        )
+        return 1
     if args.deterministic_only:
         return run_deterministic_only(config, seen)
     return run_llm_match(config, seen)

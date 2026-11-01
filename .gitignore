@@ -1,4 +1,6 @@
 .env
+.env.*
+!.env.example
 .venv/
 venv/
 __pycache__/
@@ -9,3 +11,8 @@ __pycache__/
 .mypy_cache/
 .DS_Store
 candidates.json
+
+# Personal inputs and generated state for local runs.
+/config.json
+/resume.txt
+/seen_jobs.json
